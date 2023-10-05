@@ -37,7 +37,10 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 						{ProtoField: "sender"},
 					},
 				},
-				// The UpdateParams tx is purposely left empty, the MsgUpdateParams is gov gated.
+				{
+					RpcMethod: "UpdateParams",
+					Skip:      true, // This is a authority gated tx, so we skip it.
+				},
 			},
 		},
 	}
