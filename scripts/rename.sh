@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+# This script is used to rename the example repo to the module name of your choice.
 # Usage MODULE_NAME=username/repo ./scripts/rename.sh
+# Disclaimer: this script do not work with multi-slash module names (e.g. my/awesome/repo) or module names with dashes (e.g. my-awesome-repo)
+# If you want to use a multi-slash module name, you will need to manually rename the module name in go.mod and the proto files.
+# A typical module name is 'username/proto' omitting the 'github.com/' prefix.
 
 if [[ -z $MODULE_NAME ]]; then
     echo "MODULE_NAME must be set."
