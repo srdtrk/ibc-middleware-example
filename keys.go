@@ -9,6 +9,7 @@ const (
 )
 
 var (
-	ParamsKey  = collections.NewPrefix(0)
-	CounterKey = collections.NewPrefix(1)
+	ParamsKey            = collections.NewPrefix(0)
+	CounterKey           = collections.NewPrefix(1)
+	MiddlewareEnabledKey = collections.NewPrefix(2)
 )

@@ -23,6 +23,9 @@ type Keeper struct {
 	Schema  collections.Schema
 	Params  collections.Item[example.Params]
 	Counter collections.Map[string, uint64]
+	// MiddlewareEnabled is a KeySet of (portID, channelID) that indicates whether this middleware is enabled
+	// for a given portID and channelID.
+	MiddlewareEnabled collections.KeySet[collections.Pair[string, string]]
 }
 
 // NewKeeper creates a new Keeper instance
@@ -38,6 +41,9 @@ func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService s
 		authority:    authority,
 		Params:       collections.NewItem(sb, example.ParamsKey, "params", codec.CollValue[example.Params](cdc)),
 		Counter:      collections.NewMap(sb, example.CounterKey, "counter", collections.StringKey, collections.Uint64Value),
+		MiddlewareEnabled: collections.NewKeySet(
+			sb, example.MiddlewareEnabledKey, "mw_enabled", collections.PairKeyCodec(collections.StringKey, collections.StringKey),
+		),
 	}
 
 	schema, err := sb.Build()
