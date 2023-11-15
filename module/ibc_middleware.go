@@ -11,6 +11,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	capabilitytypes "github.com/cosmos/ibc-go/modules/capability/types"
+	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/v8/modules/core/04-channel/types"
 	porttypes "github.com/cosmos/ibc-go/v8/modules/core/05-port/types"
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
@@ -19,7 +20,7 @@ import (
 	"github.com/cosmosregistry/example/keeper"
 )
 
-// var _ porttypes.Middleware = (*IBCMiddleware)(nil)
+var _ porttypes.Middleware = (*IBCMiddleware)(nil)
 
 // IBCMiddleware implements the ICS26 callbacks for example given the
 // example keeper and the underlying application.
@@ -165,7 +166,7 @@ func (im IBCMiddleware) OnChanOpenAck(
 		}
 
 		if versionMetadata.ExampleVersion != example.Version {
-			return errorsmod.Wrapf(example.ErrInvalidChannelVersion, "expected counterparty linked packets version: %s, got: %s", example.Version, versionMetadata.ExampleVersion)
+			return errorsmod.Wrapf(example.ErrInvalidChannelVersion, "expected counterparty middleware version: %s, got: %s", example.Version, versionMetadata.ExampleVersion)
 		}
 
 		// call underlying app's OnChanOpenAck callback with the counterparty app version.
@@ -174,6 +175,81 @@ func (im IBCMiddleware) OnChanOpenAck(
 
 	// call underlying app's OnChanOpenAck callback with the counterparty app version.
 	return im.app.OnChanOpenAck(ctx, portID, channelID, counterpartyChannelID, counterpartyVersion)
+}
+
+// OnChanOpenConfirm implements the IBCMiddleware interface
+func (im IBCMiddleware) OnChanOpenConfirm(
+	ctx sdk.Context,
+	portID,
+	channelID string,
+) error {
+	// call underlying app's OnChanOpenConfirm callback.
+	return im.app.OnChanOpenConfirm(ctx, portID, channelID)
+}
+
+// OnChanCloseInit implements the IBCMiddleware interface
+func (im IBCMiddleware) OnChanCloseInit(
+	ctx sdk.Context,
+	portID,
+	channelID string,
+) error {
+	// call underlying app's OnChanCloseInit callback.
+	return im.app.OnChanCloseInit(ctx, portID, channelID)
+}
+
+// OnChanCloseConfirm implements the IBCMiddleware interface
+func (im IBCMiddleware) OnChanCloseConfirm(
+	ctx sdk.Context,
+	portID,
+	channelID string,
+) error {
+	// call underlying app's OnChanCloseConfirm callback.
+	return im.app.OnChanCloseConfirm(ctx, portID, channelID)
+}
+
+// SendPacket implements the ICS4 Wrapper interface
+func (im IBCMiddleware) SendPacket(
+	ctx sdk.Context,
+	chanCap *capabilitytypes.Capability,
+	sourcePort string,
+	sourceChannel string,
+	timeoutHeight clienttypes.Height,
+	timeoutTimestamp uint64,
+	data []byte,
+) (uint64, error) {
+	return im.ics4Wrapper.SendPacket(ctx, chanCap, sourcePort, sourceChannel, timeoutHeight, timeoutTimestamp, data)
+}
+
+// OnRecvPacket implements the IBCMiddleware interface.
+func (im IBCMiddleware) OnRecvPacket(
+	ctx sdk.Context,
+	packet channeltypes.Packet,
+	relayer sdk.AccAddress,
+) ibcexported.Acknowledgement {
+	// call underlying app's OnRecvPacket callback.
+	return im.app.OnRecvPacket(ctx, packet, relayer)
+}
+
+// OnAcknowledgementPacket implements the IBCMiddleware interface
+func (im IBCMiddleware) OnAcknowledgementPacket(
+	ctx sdk.Context,
+	packet channeltypes.Packet,
+	acknowledgement []byte,
+	relayer sdk.AccAddress,
+) error {
+	// call underlying app's OnAcknowledgementPacket callback.
+	return im.app.OnAcknowledgementPacket(ctx, packet, acknowledgement, relayer)
+}
+
+// OnTimeoutPacket implements the IBCMiddleware interface
+// If fees are not enabled, this callback will default to the ibc-core packet callback
+func (im IBCMiddleware) OnTimeoutPacket(
+	ctx sdk.Context,
+	packet channeltypes.Packet,
+	relayer sdk.AccAddress,
+) error {
+	// call underlying app's OnTimeoutPacket callback.
+	return im.app.OnTimeoutPacket(ctx, packet, relayer)
 }
 
 // WriteAcknowledgement implements the ICS4 Wrapper interface
