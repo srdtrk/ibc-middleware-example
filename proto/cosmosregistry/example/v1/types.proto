@@ -12,6 +12,35 @@ message Params { option (amino.name) = "cosmosregistry/example/Params"; }
 
 // Counter defines a counter object.
 // It is used only for genesis purposes. Collections does not need to use it.
+message CallbackCounter {
+  option (amino.name) = "cosmosregistry/example/CallbackCounter";
+
+  // on_chan_open counts the number of times OnChanOpenAck or OnChanOpenConfirm
+  // is called in the underlying channel.
+  uint64 on_chan_open = 1;
+
+  // on_recv_packet counts the number of times OnRecvPacket is called in the
+  // underlying channel.
+  uint64 on_recv_packet = 2;
+
+  // on_acknowledgement counts the number of times OnAcknowledgement is called
+  // in the underlying channel.
+  uint64 on_acknowledgement = 3;
+
+  // on_timeout counts the number of times OnTimeoutPacket is called in the
+  // underlying channel.
+  uint64 on_timeout = 4;
+
+  // send_packet counts the number of times SendPacket is called in the
+  // underlying channel.
+  uint64 send_packet = 5;
+
+  // channel_id defines the channel that is associated with the callback counts.
+  string channel_id = 6;
+}
+
+// Counter defines a counter object.
+// It is used only for genesis purposes. Collections does not need to use it.
 message Counter {
   option (amino.name) = "cosmosregistry/example/Counter";
 
