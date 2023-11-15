@@ -16,8 +16,8 @@ message Params { option (amino.name) = "cosmosregistry/example/Params"; }
 // If the middleware is a stateless middleware, you need not include any
 // metadata, and can omit this message.
 message Metadata {
-  // middleware_version defines the middleware version
-  string middleware_version = 1;
+  // example_version defines the middleware version
+  string example_version = 1;
   // app_version defines the underlying application version, which may or may
   // not be a JSON encoded bytestring
   string app_version = 2;
