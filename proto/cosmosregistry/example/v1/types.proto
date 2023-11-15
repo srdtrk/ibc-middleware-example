@@ -10,6 +10,19 @@ import "amino/amino.proto";
 // Params defines the parameters of the module.
 message Params { option (amino.name) = "cosmosregistry/example/Params"; }
 
+// Metadata defines the middleware specific metadata encoded into the channel
+// version bytestring See ICS004:
+// https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#Versioning
+// If the middleware is a stateless middleware, you need not include any
+// metadata, and can omit this message.
+message Metadata {
+  // middleware_version defines the middleware version
+  string middleware_version = 1;
+  // app_version defines the underlying application version, which may or may
+  // not be a JSON encoded bytestring
+  string app_version = 2;
+}
+
 // Counter defines a counter object.
 // It is used only for genesis purposes. Collections does not need to use it.
 message CallbackCounter {
