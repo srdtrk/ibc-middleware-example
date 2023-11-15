@@ -2,7 +2,11 @@ package example
 
 import "cosmossdk.io/collections"
 
-const ModuleName = "example"
+const (
+	ModuleName = "example"
+
+	Version = "example-1"
+) 
 
 var (
 	ParamsKey  = collections.NewPrefix(0)
