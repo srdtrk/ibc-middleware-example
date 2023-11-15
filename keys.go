@@ -12,4 +12,5 @@ var (
 	ParamsKey            = collections.NewPrefix(0)
 	CounterKey           = collections.NewPrefix(1)
 	MiddlewareEnabledKey = collections.NewPrefix(2)
+	CallbackCounterKey   = collections.NewPrefix(3)
 )

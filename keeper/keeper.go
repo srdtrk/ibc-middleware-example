@@ -26,6 +26,9 @@ type Keeper struct {
 	// MiddlewareEnabled is a KeySet of (portID, channelID) that indicates whether this middleware is enabled
 	// for a given portID and channelID.
 	MiddlewareEnabled collections.KeySet[collections.Pair[string, string]]
+	// CallbackCounter is a map of (portID, channelID) to a counter that is incremented every time an expected
+	// channel or packet lifecycle callback is called.
+	CallbackCounter collections.Map[collections.Pair[string, string], example.CallbackCounter]
 }
 
 // NewKeeper creates a new Keeper instance
@@ -43,6 +46,10 @@ func NewKeeper(cdc codec.BinaryCodec, addressCodec address.Codec, storeService s
 		Counter:      collections.NewMap(sb, example.CounterKey, "counter", collections.StringKey, collections.Uint64Value),
 		MiddlewareEnabled: collections.NewKeySet(
 			sb, example.MiddlewareEnabledKey, "mw_enabled", collections.PairKeyCodec(collections.StringKey, collections.StringKey),
+		),
+		CallbackCounter: collections.NewMap(
+			sb, example.CallbackCounterKey, "callback_counter", collections.PairKeyCodec(collections.StringKey, collections.StringKey),
+			codec.CollValue[example.CallbackCounter](cdc),
 		),
 	}
 
