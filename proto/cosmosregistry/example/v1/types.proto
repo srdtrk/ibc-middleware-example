@@ -31,13 +31,13 @@ message CallbackCounter {
   // underlying channel.
   uint64 on_recv_packet = 1;
 
-  // on_acknowledgement counts the number of times OnAcknowledgement is called
-  // in the underlying channel.
-  uint64 on_acknowledgement = 2;
+  // on_acknowledgement_packet counts the number of times
+  // OnAcknowledgementPacket is called in the underlying channel.
+  uint64 on_acknowledgement_packet = 2;
 
-  // on_timeout counts the number of times OnTimeoutPacket is called in the
-  // underlying channel.
-  uint64 on_timeout = 3;
+  // on_timeout_packet counts the number of times OnTimeoutPacket is called in
+  // the underlying channel.
+  uint64 on_timeout_packet = 3;
 
   // send_packet counts the number of times SendPacket is called in the
   // underlying channel.
