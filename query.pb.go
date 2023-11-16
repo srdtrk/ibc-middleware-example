@@ -6,7 +6,6 @@ package example
 import (
 	context "context"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-proto"
 	query "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -32,25 +31,27 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// QueryCounterRequest is the request type for the Query/Counter RPC
+// QueryCallbackCounterRequest is the request type for the Query/Counter RPC
 // method.
-type QueryCounterRequest struct {
-	// address defines the address to query for the counter.
-	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+type QueryCallbackCounterRequest struct {
+	// port_id defines the port_id to query for the counter.
+	PortId string `protobuf:"bytes,1,opt,name=port_id,json=portId,proto3" json:"port_id,omitempty"`
+	// channel_id defines the channel_id to query for the counter.
+	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 }
 
-func (m *QueryCounterRequest) Reset()         { *m = QueryCounterRequest{} }
-func (m *QueryCounterRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryCounterRequest) ProtoMessage()    {}
-func (*QueryCounterRequest) Descriptor() ([]byte, []int) {
+func (m *QueryCallbackCounterRequest) Reset()         { *m = QueryCallbackCounterRequest{} }
+func (m *QueryCallbackCounterRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryCallbackCounterRequest) ProtoMessage()    {}
+func (*QueryCallbackCounterRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_63eea967130d0f16, []int{0}
 }
-func (m *QueryCounterRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryCallbackCounterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryCounterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryCallbackCounterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryCounterRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryCallbackCounterRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -60,44 +61,51 @@ func (m *QueryCounterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *QueryCounterRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryCounterRequest.Merge(m, src)
+func (m *QueryCallbackCounterRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCallbackCounterRequest.Merge(m, src)
 }
-func (m *QueryCounterRequest) XXX_Size() int {
+func (m *QueryCallbackCounterRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryCounterRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryCounterRequest.DiscardUnknown(m)
+func (m *QueryCallbackCounterRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCallbackCounterRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryCounterRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryCallbackCounterRequest proto.InternalMessageInfo
 
-func (m *QueryCounterRequest) GetAddress() string {
+func (m *QueryCallbackCounterRequest) GetPortId() string {
 	if m != nil {
-		return m.Address
+		return m.PortId
 	}
 	return ""
 }
 
-// QueryCounterResponse is the response type for the Query/Counter RPC
-// method.
-type QueryCounterResponse struct {
-	// counter defines the current counter for the sender.
-	Counter uint64 `protobuf:"varint,1,opt,name=counter,proto3" json:"counter,omitempty"`
+func (m *QueryCallbackCounterRequest) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
 }
 
-func (m *QueryCounterResponse) Reset()         { *m = QueryCounterResponse{} }
-func (m *QueryCounterResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryCounterResponse) ProtoMessage()    {}
-func (*QueryCounterResponse) Descriptor() ([]byte, []int) {
+// QueryCallbackCounterResponse is the response type for the Query/Counter RPC
+// method.
+type QueryCallbackCounterResponse struct {
+	// counter defines the current counter for the sender.
+	Counter *CallbackCounter `protobuf:"bytes,1,opt,name=counter,proto3" json:"counter,omitempty"`
+}
+
+func (m *QueryCallbackCounterResponse) Reset()         { *m = QueryCallbackCounterResponse{} }
+func (m *QueryCallbackCounterResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryCallbackCounterResponse) ProtoMessage()    {}
+func (*QueryCallbackCounterResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_63eea967130d0f16, []int{1}
 }
-func (m *QueryCounterResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryCallbackCounterResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryCounterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryCallbackCounterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryCounterResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryCallbackCounterResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -107,43 +115,43 @@ func (m *QueryCounterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte
 		return b[:n], nil
 	}
 }
-func (m *QueryCounterResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryCounterResponse.Merge(m, src)
+func (m *QueryCallbackCounterResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCallbackCounterResponse.Merge(m, src)
 }
-func (m *QueryCounterResponse) XXX_Size() int {
+func (m *QueryCallbackCounterResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryCounterResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryCounterResponse.DiscardUnknown(m)
+func (m *QueryCallbackCounterResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCallbackCounterResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryCounterResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryCallbackCounterResponse proto.InternalMessageInfo
 
-func (m *QueryCounterResponse) GetCounter() uint64 {
+func (m *QueryCallbackCounterResponse) GetCounter() *CallbackCounter {
 	if m != nil {
 		return m.Counter
 	}
-	return 0
+	return nil
 }
 
-// QueryCountersResponse is the request type for the Query/Counters RPC
-type QueryCountersRequest struct {
+// QueryCallbackCountersRequest is the request type for the Query/Counters RPC
+type QueryCallbackCountersRequest struct {
 	// pagination defines an optional pagination for the request.
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryCountersRequest) Reset()         { *m = QueryCountersRequest{} }
-func (m *QueryCountersRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryCountersRequest) ProtoMessage()    {}
-func (*QueryCountersRequest) Descriptor() ([]byte, []int) {
+func (m *QueryCallbackCountersRequest) Reset()         { *m = QueryCallbackCountersRequest{} }
+func (m *QueryCallbackCountersRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryCallbackCountersRequest) ProtoMessage()    {}
+func (*QueryCallbackCountersRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_63eea967130d0f16, []int{2}
 }
-func (m *QueryCountersRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryCallbackCountersRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryCountersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryCallbackCountersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryCountersRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryCallbackCountersRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -153,46 +161,46 @@ func (m *QueryCountersRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte
 		return b[:n], nil
 	}
 }
-func (m *QueryCountersRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryCountersRequest.Merge(m, src)
+func (m *QueryCallbackCountersRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCallbackCountersRequest.Merge(m, src)
 }
-func (m *QueryCountersRequest) XXX_Size() int {
+func (m *QueryCallbackCountersRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryCountersRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryCountersRequest.DiscardUnknown(m)
+func (m *QueryCallbackCountersRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCallbackCountersRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryCountersRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryCallbackCountersRequest proto.InternalMessageInfo
 
-func (m *QueryCountersRequest) GetPagination() *query.PageRequest {
+func (m *QueryCallbackCountersRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-// QueryCountersResponse is the response type for the Query/Counters RPC
+// QueryCallbackCountersResponse is the response type for the Query/Counters RPC
 // method.
-type QueryCountersResponse struct {
-	// counters defines all the counters in the store.
-	Counters []*Counter `protobuf:"bytes,1,rep,name=counters,proto3" json:"counters,omitempty"`
+type QueryCallbackCountersResponse struct {
+	// counters defines all the callback counters in the store.
+	Counters []*CallbackCounter `protobuf:"bytes,1,rep,name=counters,proto3" json:"counters,omitempty"`
 	// pagination defines the pagination in the response.
 	Pagination *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryCountersResponse) Reset()         { *m = QueryCountersResponse{} }
-func (m *QueryCountersResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryCountersResponse) ProtoMessage()    {}
-func (*QueryCountersResponse) Descriptor() ([]byte, []int) {
+func (m *QueryCallbackCountersResponse) Reset()         { *m = QueryCallbackCountersResponse{} }
+func (m *QueryCallbackCountersResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryCallbackCountersResponse) ProtoMessage()    {}
+func (*QueryCallbackCountersResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_63eea967130d0f16, []int{3}
 }
-func (m *QueryCountersResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryCallbackCountersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryCountersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryCallbackCountersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryCountersResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryCallbackCountersResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -202,26 +210,26 @@ func (m *QueryCountersResponse) XXX_Marshal(b []byte, deterministic bool) ([]byt
 		return b[:n], nil
 	}
 }
-func (m *QueryCountersResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryCountersResponse.Merge(m, src)
+func (m *QueryCallbackCountersResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryCallbackCountersResponse.Merge(m, src)
 }
-func (m *QueryCountersResponse) XXX_Size() int {
+func (m *QueryCallbackCountersResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryCountersResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryCountersResponse.DiscardUnknown(m)
+func (m *QueryCallbackCountersResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryCallbackCountersResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryCountersResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryCallbackCountersResponse proto.InternalMessageInfo
 
-func (m *QueryCountersResponse) GetCounters() []*Counter {
+func (m *QueryCallbackCountersResponse) GetCounters() []*CallbackCounter {
 	if m != nil {
 		return m.Counters
 	}
 	return nil
 }
 
-func (m *QueryCountersResponse) GetPagination() *query.PageResponse {
+func (m *QueryCallbackCountersResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -312,10 +320,10 @@ func (m *QueryParamsResponse) GetParams() Params {
 }
 
 func init() {
-	proto.RegisterType((*QueryCounterRequest)(nil), "cosmosregistry.example.v1.QueryCounterRequest")
-	proto.RegisterType((*QueryCounterResponse)(nil), "cosmosregistry.example.v1.QueryCounterResponse")
-	proto.RegisterType((*QueryCountersRequest)(nil), "cosmosregistry.example.v1.QueryCountersRequest")
-	proto.RegisterType((*QueryCountersResponse)(nil), "cosmosregistry.example.v1.QueryCountersResponse")
+	proto.RegisterType((*QueryCallbackCounterRequest)(nil), "cosmosregistry.example.v1.QueryCallbackCounterRequest")
+	proto.RegisterType((*QueryCallbackCounterResponse)(nil), "cosmosregistry.example.v1.QueryCallbackCounterResponse")
+	proto.RegisterType((*QueryCallbackCountersRequest)(nil), "cosmosregistry.example.v1.QueryCallbackCountersRequest")
+	proto.RegisterType((*QueryCallbackCountersResponse)(nil), "cosmosregistry.example.v1.QueryCallbackCountersResponse")
 	proto.RegisterType((*QueryParamsRequest)(nil), "cosmosregistry.example.v1.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "cosmosregistry.example.v1.QueryParamsResponse")
 }
@@ -325,41 +333,42 @@ func init() {
 }
 
 var fileDescriptor_63eea967130d0f16 = []byte{
-	// 544 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x94, 0x4f, 0x6f, 0xd3, 0x4c,
-	0x10, 0xc6, 0xb3, 0xed, 0xfb, 0x26, 0xed, 0xf6, 0xc4, 0x12, 0xa4, 0x60, 0x90, 0x21, 0xae, 0x0a,
-	0xa5, 0xa2, 0xbb, 0x49, 0x38, 0x21, 0x24, 0x24, 0x02, 0x02, 0x71, 0x2b, 0xe6, 0x06, 0x12, 0x68,
-	0x93, 0xae, 0x8c, 0xa5, 0xda, 0xeb, 0x7a, 0x37, 0x11, 0x11, 0xe2, 0xc2, 0x89, 0x23, 0x82, 0x0f,
-	0x00, 0x17, 0x24, 0x8e, 0x1c, 0xf8, 0x10, 0x3d, 0x56, 0x70, 0xe1, 0x84, 0x50, 0x82, 0xe0, 0x6b,
-	0x20, 0xef, 0xce, 0xd2, 0x1a, 0x91, 0x3f, 0x97, 0xc8, 0x9e, 0x99, 0x67, 0xe6, 0xb7, 0xcf, 0x6c,
-	0x8c, 0x37, 0xfa, 0x52, 0x25, 0x52, 0xe5, 0x22, 0x8a, 0x95, 0xce, 0x47, 0x4c, 0x3c, 0xe5, 0x49,
-	0xb6, 0x27, 0xd8, 0xb0, 0xcd, 0xf6, 0x07, 0x22, 0x1f, 0xd1, 0x2c, 0x97, 0x5a, 0x92, 0xd3, 0xe5,
-	0x32, 0x0a, 0x65, 0x74, 0xd8, 0xf6, 0xb6, 0x6c, 0x8a, 0xf5, 0xb8, 0x12, 0x56, 0xc3, 0x86, 0xed,
-	0x9e, 0xd0, 0xbc, 0xcd, 0x32, 0x1e, 0xc5, 0x29, 0xd7, 0xb1, 0x4c, 0x6d, 0x1b, 0x6f, 0xc6, 0x34,
-	0x3d, 0xca, 0x84, 0x82, 0xb2, 0xb3, 0x91, 0x94, 0xd1, 0x9e, 0x60, 0x3c, 0x8b, 0x19, 0x4f, 0x53,
-	0xa9, 0x4d, 0x0f, 0x97, 0x3d, 0x03, 0x03, 0xdd, 0xac, 0xe3, 0xa0, 0xde, 0x09, 0x9e, 0xc4, 0xa9,
-	0x64, 0xe6, 0x17, 0x42, 0xf5, 0x48, 0x46, 0xd2, 0x3c, 0xb2, 0xe2, 0x09, 0xa2, 0x70, 0xa2, 0xc7,
-	0x36, 0x61, 0x5f, 0x6c, 0x2a, 0xb8, 0x8b, 0x4f, 0xde, 0x2b, 0x5a, 0xde, 0x94, 0x83, 0x54, 0x8b,
-	0x3c, 0x14, 0xfb, 0x03, 0xa1, 0x34, 0xe9, 0xe0, 0x1a, 0xdf, 0xdd, 0xcd, 0x85, 0x52, 0x0d, 0x74,
-	0x1e, 0x6d, 0xae, 0x76, 0x1b, 0x9f, 0x3f, 0x6d, 0xd7, 0x41, 0x79, 0xc3, 0x66, 0xee, 0xeb, 0x3c,
-	0x4e, 0xa3, 0xd0, 0x15, 0x06, 0x2d, 0x5c, 0x2f, 0xb7, 0x52, 0x99, 0x4c, 0x95, 0x20, 0x0d, 0x5c,
-	0xeb, 0xdb, 0x90, 0xe9, 0xf5, 0x5f, 0xe8, 0x5e, 0x83, 0x47, 0x65, 0x85, 0x72, 0xd3, 0x6f, 0x63,
-	0x7c, 0x64, 0xa7, 0x11, 0xad, 0x75, 0x2e, 0x50, 0x98, 0x5e, 0x78, 0x4f, 0xad, 0x0d, 0xe0, 0x3d,
-	0xdd, 0xe1, 0x91, 0x00, 0x6d, 0x78, 0x4c, 0x19, 0xbc, 0x43, 0xf8, 0xd4, 0x5f, 0x03, 0x80, 0xe9,
-	0x3a, 0x5e, 0x01, 0x88, 0xe2, 0x80, 0xcb, 0x9b, 0x6b, 0x9d, 0x80, 0x4e, 0x5d, 0x3b, 0x75, 0x27,
-	0xfa, 0xa3, 0x21, 0x77, 0x4a, 0x84, 0x4b, 0x86, 0xf0, 0xe2, 0x5c, 0x42, 0x3b, 0xbc, 0x84, 0x58,
-	0xc7, 0xc4, 0x10, 0xee, 0xf0, 0x9c, 0x27, 0xce, 0x80, 0xe0, 0x21, 0x6c, 0xc5, 0x45, 0x81, 0xfa,
-	0x16, 0xae, 0x66, 0x26, 0x02, 0x9e, 0x34, 0x67, 0x30, 0x5b, 0x69, 0x77, 0xf5, 0xe0, 0xdb, 0xb9,
-	0xca, 0x87, 0x5f, 0x1f, 0xb7, 0x50, 0x08, 0xda, 0xce, 0xcf, 0x65, 0xfc, 0xbf, 0xe9, 0x4e, 0xde,
-	0x23, 0x5c, 0x83, 0xb3, 0x11, 0x3a, 0xa3, 0xd7, 0x3f, 0x6e, 0x88, 0xc7, 0x16, 0xae, 0xb7, 0xf0,
-	0xc1, 0xd5, 0x97, 0x05, 0xc5, 0x8b, 0x2f, 0x3f, 0xde, 0x2c, 0x51, 0x72, 0x99, 0x4d, 0xff, 0x77,
-	0x80, 0xc9, 0xec, 0x19, 0x5c, 0xac, 0xe7, 0xe4, 0x2d, 0xc2, 0x2b, 0x6e, 0x85, 0x64, 0xd1, 0xc1,
-	0xce, 0x4c, 0xaf, 0xb5, 0xb8, 0x00, 0x50, 0x5b, 0x47, 0xa8, 0x1b, 0x64, 0x7d, 0x3e, 0xaa, 0x22,
-	0xaf, 0x11, 0xae, 0x5a, 0xc7, 0xc9, 0xf6, 0xbc, 0x71, 0xa5, 0x55, 0x7b, 0x74, 0xd1, 0x72, 0x60,
-	0xbb, 0x64, 0xb0, 0xd6, 0x49, 0x73, 0x06, 0x96, 0x5d, 0x74, 0xf7, 0xda, 0xc1, 0xd8, 0x47, 0x87,
-	0x63, 0x1f, 0x7d, 0x1f, 0xfb, 0xe8, 0xd5, 0xc4, 0xaf, 0x1c, 0x4e, 0xfc, 0xca, 0xd7, 0x89, 0x5f,
-	0x79, 0xd0, 0x8c, 0x62, 0xfd, 0x64, 0xd0, 0xa3, 0x7d, 0x99, 0x4c, 0x69, 0xd3, 0xab, 0x9a, 0xef,
-	0xc3, 0x95, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0xc2, 0xc1, 0x5e, 0x9b, 0x35, 0x05, 0x00, 0x00,
+	// 557 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4f, 0x6b, 0x13, 0x41,
+	0x14, 0xcf, 0x44, 0x4d, 0xcd, 0x78, 0x50, 0xc7, 0x82, 0x75, 0xdb, 0xae, 0xcd, 0x8a, 0xff, 0x22,
+	0x9d, 0x21, 0x15, 0xb4, 0xe0, 0xc9, 0x46, 0x2a, 0xbd, 0x48, 0x0d, 0x78, 0xd1, 0x83, 0x4c, 0x36,
+	0xe3, 0x76, 0x71, 0x77, 0x67, 0xbb, 0x33, 0x09, 0x86, 0xd2, 0x8b, 0x27, 0x8f, 0xa2, 0x5f, 0xc2,
+	0x63, 0xc1, 0x0f, 0xe0, 0xb5, 0xc7, 0xa2, 0x17, 0x4f, 0x22, 0x89, 0xe0, 0xd7, 0x28, 0x3b, 0x33,
+	0xdb, 0x74, 0x43, 0xb3, 0x6d, 0x2e, 0x61, 0xf2, 0xde, 0xfb, 0xfd, 0x79, 0x7f, 0x12, 0x78, 0xdb,
+	0xe5, 0x22, 0xe4, 0x22, 0x61, 0x9e, 0x2f, 0x64, 0xd2, 0x27, 0xec, 0x03, 0x0d, 0xe3, 0x80, 0x91,
+	0x5e, 0x83, 0x6c, 0x77, 0x59, 0xd2, 0xc7, 0x71, 0xc2, 0x25, 0x47, 0x37, 0xf2, 0x65, 0xd8, 0x94,
+	0xe1, 0x5e, 0xc3, 0xaa, 0xeb, 0x14, 0x69, 0x53, 0xc1, 0x34, 0x86, 0xf4, 0x1a, 0x6d, 0x26, 0x69,
+	0x83, 0xc4, 0xd4, 0xf3, 0x23, 0x2a, 0x7d, 0x1e, 0x69, 0x1a, 0xab, 0x40, 0x4d, 0xf6, 0x63, 0x26,
+	0x4c, 0xd9, 0x82, 0xc7, 0xb9, 0x17, 0x30, 0x42, 0x63, 0x9f, 0xd0, 0x28, 0xe2, 0x52, 0x71, 0x64,
+	0xd9, 0x79, 0x23, 0x98, 0x69, 0x1d, 0x37, 0x6a, 0x5d, 0xa5, 0xa1, 0x1f, 0x71, 0xa2, 0x3e, 0x4d,
+	0x68, 0xd6, 0xe3, 0x1e, 0x57, 0x4f, 0x92, 0xbe, 0x74, 0xd4, 0x79, 0x05, 0xe7, 0x5f, 0xa6, 0xb8,
+	0x26, 0x0d, 0x82, 0x36, 0x75, 0xdf, 0x37, 0x79, 0x37, 0x92, 0x2c, 0x69, 0xb1, 0xed, 0x2e, 0x13,
+	0x12, 0x5d, 0x87, 0x33, 0x31, 0x4f, 0xe4, 0x5b, 0xbf, 0x33, 0x07, 0x96, 0xc0, 0xbd, 0x6a, 0xab,
+	0x92, 0x7e, 0xdd, 0xe8, 0xa0, 0x45, 0x08, 0xdd, 0x2d, 0x1a, 0x45, 0x2c, 0x48, 0x73, 0x65, 0x95,
+	0xab, 0x9a, 0xc8, 0x46, 0xc7, 0xe9, 0xc0, 0x85, 0x93, 0x69, 0x45, 0xcc, 0x23, 0xc1, 0xd0, 0x33,
+	0x38, 0xe3, 0xea, 0x90, 0xe2, 0xbd, 0xb4, 0x52, 0xc7, 0x13, 0x47, 0x8b, 0xc7, 0x49, 0x32, 0xa8,
+	0xf3, 0xee, 0x64, 0x15, 0x91, 0xb9, 0x5f, 0x87, 0x70, 0x34, 0x7b, 0x23, 0x74, 0xc7, 0x08, 0xe1,
+	0x74, 0x51, 0x58, 0xcf, 0xcc, 0x2c, 0x0a, 0x6f, 0x52, 0x8f, 0x19, 0x6c, 0xeb, 0x18, 0xd2, 0xd9,
+	0x03, 0x70, 0x71, 0x82, 0x90, 0xe9, 0x67, 0x1d, 0x5e, 0x34, 0xa6, 0xc4, 0x1c, 0x58, 0x3a, 0x37,
+	0x65, 0x43, 0x47, 0x58, 0xf4, 0x3c, 0xe7, 0xb8, 0xac, 0x1c, 0xdf, 0x3d, 0xd5, 0xb1, 0x36, 0x91,
+	0xb3, 0x3c, 0x0b, 0x91, 0x72, 0xbc, 0x49, 0x13, 0x1a, 0x66, 0x03, 0x71, 0xde, 0xc0, 0x6b, 0xb9,
+	0xe8, 0xd1, 0x36, 0x2a, 0xb1, 0x8a, 0x98, 0x19, 0xd5, 0x0a, 0xbc, 0x6b, 0xe8, 0x5a, 0x75, 0xff,
+	0xcf, 0xcd, 0xd2, 0xb7, 0xff, 0x7b, 0x75, 0xd0, 0x32, 0xd8, 0x95, 0xef, 0xe7, 0xe1, 0x05, 0xc5,
+	0x8e, 0x7e, 0x02, 0x78, 0x79, 0xac, 0x47, 0xf4, 0xa8, 0x80, 0xb3, 0xe0, 0x02, 0xad, 0xc7, 0x53,
+	0xe3, 0x74, 0x53, 0xce, 0x8b, 0x4f, 0xa9, 0xbb, 0x8f, 0xbf, 0xfe, 0x7d, 0x2d, 0x37, 0xd1, 0x53,
+	0x32, 0xf9, 0x27, 0xe7, 0x1a, 0x02, 0xb3, 0x04, 0xb2, 0x63, 0x2e, 0x7e, 0x97, 0xec, 0x8c, 0x4e,
+	0x7c, 0x17, 0xfd, 0x00, 0xf0, 0xca, 0xf8, 0xfe, 0xd1, 0xb4, 0xee, 0xb2, 0x4d, 0x58, 0xab, 0xd3,
+	0x03, 0x4d, 0x5f, 0xab, 0xa3, 0xbe, 0x96, 0xd1, 0x83, 0xb3, 0xf7, 0x25, 0xd0, 0x17, 0x00, 0x2b,
+	0x7a, 0x7d, 0x68, 0xf9, 0x34, 0xf9, 0xdc, 0xdd, 0x58, 0xf8, 0xac, 0xe5, 0xc6, 0xe3, 0x7d, 0x65,
+	0xef, 0x16, 0xaa, 0x15, 0xd8, 0xd3, 0x57, 0xb3, 0xf6, 0x64, 0x7f, 0x60, 0x83, 0x83, 0x81, 0x0d,
+	0xfe, 0x0e, 0x6c, 0xf0, 0x79, 0x68, 0x97, 0x0e, 0x86, 0x76, 0xe9, 0xf7, 0xd0, 0x2e, 0xbd, 0xae,
+	0x79, 0xbe, 0xdc, 0xea, 0xb6, 0xb1, 0xcb, 0xc3, 0x09, 0x34, 0xed, 0x8a, 0xfa, 0x13, 0x7b, 0x78,
+	0x18, 0x00, 0x00, 0xff, 0xff, 0x44, 0x43, 0x6b, 0xdb, 0xbf, 0x05, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -374,10 +383,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
-	// Counter returns the current counter value.
-	Counter(ctx context.Context, in *QueryCounterRequest, opts ...grpc.CallOption) (*QueryCounterResponse, error)
-	// Counters returns all the counter values.
-	Counters(ctx context.Context, in *QueryCountersRequest, opts ...grpc.CallOption) (*QueryCountersResponse, error)
+	// CallbackCounter returns the current callback counter value.
+	CallbackCounter(ctx context.Context, in *QueryCallbackCounterRequest, opts ...grpc.CallOption) (*QueryCallbackCounterResponse, error)
+	// CallbackCounters returns all the counter values.
+	CallbackCounters(ctx context.Context, in *QueryCallbackCountersRequest, opts ...grpc.CallOption) (*QueryCallbackCountersResponse, error)
 	// Params returns the module parameters.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 }
@@ -390,18 +399,18 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 	return &queryClient{cc}
 }
 
-func (c *queryClient) Counter(ctx context.Context, in *QueryCounterRequest, opts ...grpc.CallOption) (*QueryCounterResponse, error) {
-	out := new(QueryCounterResponse)
-	err := c.cc.Invoke(ctx, "/cosmosregistry.example.v1.Query/Counter", in, out, opts...)
+func (c *queryClient) CallbackCounter(ctx context.Context, in *QueryCallbackCounterRequest, opts ...grpc.CallOption) (*QueryCallbackCounterResponse, error) {
+	out := new(QueryCallbackCounterResponse)
+	err := c.cc.Invoke(ctx, "/cosmosregistry.example.v1.Query/CallbackCounter", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) Counters(ctx context.Context, in *QueryCountersRequest, opts ...grpc.CallOption) (*QueryCountersResponse, error) {
-	out := new(QueryCountersResponse)
-	err := c.cc.Invoke(ctx, "/cosmosregistry.example.v1.Query/Counters", in, out, opts...)
+func (c *queryClient) CallbackCounters(ctx context.Context, in *QueryCallbackCountersRequest, opts ...grpc.CallOption) (*QueryCallbackCountersResponse, error) {
+	out := new(QueryCallbackCountersResponse)
+	err := c.cc.Invoke(ctx, "/cosmosregistry.example.v1.Query/CallbackCounters", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -419,10 +428,10 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 
 // QueryServer is the server API for Query service.
 type QueryServer interface {
-	// Counter returns the current counter value.
-	Counter(context.Context, *QueryCounterRequest) (*QueryCounterResponse, error)
-	// Counters returns all the counter values.
-	Counters(context.Context, *QueryCountersRequest) (*QueryCountersResponse, error)
+	// CallbackCounter returns the current callback counter value.
+	CallbackCounter(context.Context, *QueryCallbackCounterRequest) (*QueryCallbackCounterResponse, error)
+	// CallbackCounters returns all the counter values.
+	CallbackCounters(context.Context, *QueryCallbackCountersRequest) (*QueryCallbackCountersResponse, error)
 	// Params returns the module parameters.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 }
@@ -431,11 +440,11 @@ type QueryServer interface {
 type UnimplementedQueryServer struct {
 }
 
-func (*UnimplementedQueryServer) Counter(ctx context.Context, req *QueryCounterRequest) (*QueryCounterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Counter not implemented")
+func (*UnimplementedQueryServer) CallbackCounter(ctx context.Context, req *QueryCallbackCounterRequest) (*QueryCallbackCounterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CallbackCounter not implemented")
 }
-func (*UnimplementedQueryServer) Counters(ctx context.Context, req *QueryCountersRequest) (*QueryCountersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Counters not implemented")
+func (*UnimplementedQueryServer) CallbackCounters(ctx context.Context, req *QueryCallbackCountersRequest) (*QueryCallbackCountersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CallbackCounters not implemented")
 }
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
@@ -445,38 +454,38 @@ func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
 	s.RegisterService(&_Query_serviceDesc, srv)
 }
 
-func _Query_Counter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCounterRequest)
+func _Query_CallbackCounter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCallbackCounterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Counter(ctx, in)
+		return srv.(QueryServer).CallbackCounter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cosmosregistry.example.v1.Query/Counter",
+		FullMethod: "/cosmosregistry.example.v1.Query/CallbackCounter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Counter(ctx, req.(*QueryCounterRequest))
+		return srv.(QueryServer).CallbackCounter(ctx, req.(*QueryCallbackCounterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_Counters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCountersRequest)
+func _Query_CallbackCounters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCallbackCountersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Counters(ctx, in)
+		return srv.(QueryServer).CallbackCounters(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cosmosregistry.example.v1.Query/Counters",
+		FullMethod: "/cosmosregistry.example.v1.Query/CallbackCounters",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Counters(ctx, req.(*QueryCountersRequest))
+		return srv.(QueryServer).CallbackCounters(ctx, req.(*QueryCallbackCountersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -504,12 +513,12 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Counter",
-			Handler:    _Query_Counter_Handler,
+			MethodName: "CallbackCounter",
+			Handler:    _Query_CallbackCounter_Handler,
 		},
 		{
-			MethodName: "Counters",
-			Handler:    _Query_Counters_Handler,
+			MethodName: "CallbackCounters",
+			Handler:    _Query_CallbackCounters_Handler,
 		},
 		{
 			MethodName: "Params",
@@ -520,7 +529,7 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 	Metadata: "cosmosregistry/example/v1/query.proto",
 }
 
-func (m *QueryCounterRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryCallbackCounterRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -530,27 +539,34 @@ func (m *QueryCounterRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryCounterRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryCallbackCounterRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryCounterRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryCallbackCounterRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Address) > 0 {
-		i -= len(m.Address)
-		copy(dAtA[i:], m.Address)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.Address)))
+	if len(m.ChannelId) > 0 {
+		i -= len(m.ChannelId)
+		copy(dAtA[i:], m.ChannelId)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.ChannelId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.PortId) > 0 {
+		i -= len(m.PortId)
+		copy(dAtA[i:], m.PortId)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.PortId)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryCounterResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryCallbackCounterResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -560,25 +576,32 @@ func (m *QueryCounterResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryCounterResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryCallbackCounterResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryCounterResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryCallbackCounterResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Counter != 0 {
-		i = encodeVarintQuery(dAtA, i, uint64(m.Counter))
+	if m.Counter != nil {
+		{
+			size, err := m.Counter.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
 		i--
-		dAtA[i] = 0x8
+		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryCountersRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryCallbackCountersRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -588,12 +611,12 @@ func (m *QueryCountersRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryCountersRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryCallbackCountersRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryCountersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryCallbackCountersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -613,7 +636,7 @@ func (m *QueryCountersRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryCountersResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryCallbackCountersResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -623,12 +646,12 @@ func (m *QueryCountersResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryCountersResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryCallbackCountersResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryCountersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryCallbackCountersResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -729,32 +752,37 @@ func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *QueryCounterRequest) Size() (n int) {
+func (m *QueryCallbackCounterRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Address)
+	l = len(m.PortId)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.ChannelId)
 	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
 }
 
-func (m *QueryCounterResponse) Size() (n int) {
+func (m *QueryCallbackCounterResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Counter != 0 {
-		n += 1 + sovQuery(uint64(m.Counter))
+	if m.Counter != nil {
+		l = m.Counter.Size()
+		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
 }
 
-func (m *QueryCountersRequest) Size() (n int) {
+func (m *QueryCallbackCountersRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -767,7 +795,7 @@ func (m *QueryCountersRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryCountersResponse) Size() (n int) {
+func (m *QueryCallbackCountersResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -812,7 +840,7 @@ func sovQuery(x uint64) (n int) {
 func sozQuery(x uint64) (n int) {
 	return sovQuery(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *QueryCounterRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryCallbackCounterRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -835,15 +863,15 @@ func (m *QueryCounterRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryCounterRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryCallbackCounterRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryCounterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryCallbackCounterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PortId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -871,7 +899,39 @@ func (m *QueryCounterRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Address = string(dAtA[iNdEx:postIndex])
+			m.PortId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChannelId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ChannelId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -894,7 +954,7 @@ func (m *QueryCounterRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryCounterResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryCallbackCounterResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -917,17 +977,17 @@ func (m *QueryCounterResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryCounterResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryCallbackCounterResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryCounterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryCallbackCounterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Counter", wireType)
 			}
-			m.Counter = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -937,11 +997,28 @@ func (m *QueryCounterResponse) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Counter |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Counter == nil {
+				m.Counter = &CallbackCounter{}
+			}
+			if err := m.Counter.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])
@@ -963,7 +1040,7 @@ func (m *QueryCounterResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryCountersRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryCallbackCountersRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -986,10 +1063,10 @@ func (m *QueryCountersRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryCountersRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryCallbackCountersRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryCountersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryCallbackCountersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1049,7 +1126,7 @@ func (m *QueryCountersRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryCountersResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryCallbackCountersResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1072,10 +1149,10 @@ func (m *QueryCountersResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryCountersResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryCallbackCountersResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryCountersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryCallbackCountersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1107,7 +1184,7 @@ func (m *QueryCountersResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Counters = append(m.Counters, &Counter{})
+			m.Counters = append(m.Counters, &CallbackCounter{})
 			if err := m.Counters[len(m.Counters)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

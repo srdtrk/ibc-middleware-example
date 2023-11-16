@@ -13,16 +13,19 @@ import "gogoproto/gogo.proto";
 // Msg defines the module Msg service.
 service Query {
   // CallbackCounter returns the current callback counter value.
-  rpc CallbackCounter(QueryCallbackCounterRequest) returns (QueryCallbackCounterResponse) {
+  rpc CallbackCounter(QueryCallbackCounterRequest)
+      returns (QueryCallbackCounterResponse) {
     option (cosmos.query.v1.module_query_safe) = true;
     option (google.api.http).get =
         "/cosmosregistry/example/v1/callbackcounter/{port_id}/{channel_id}";
   }
 
   // CallbackCounters returns all the counter values.
-  rpc CallbackCounters(QueryCallbackCountersRequest) returns (QueryCallbackCountersResponse) {
+  rpc CallbackCounters(QueryCallbackCountersRequest)
+      returns (QueryCallbackCountersResponse) {
     option (cosmos.query.v1.module_query_safe) = true;
-    option (google.api.http).get = "/cosmosregistry/example/v1/callbackcounters";
+    option (google.api.http).get =
+        "/cosmosregistry/example/v1/callbackcounters";
   }
 
   // Params returns the module parameters.

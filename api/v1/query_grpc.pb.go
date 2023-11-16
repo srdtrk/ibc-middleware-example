@@ -19,19 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Counter_FullMethodName  = "/cosmosregistry.example.v1.Query/Counter"
-	Query_Counters_FullMethodName = "/cosmosregistry.example.v1.Query/Counters"
-	Query_Params_FullMethodName   = "/cosmosregistry.example.v1.Query/Params"
+	Query_CallbackCounter_FullMethodName  = "/cosmosregistry.example.v1.Query/CallbackCounter"
+	Query_CallbackCounters_FullMethodName = "/cosmosregistry.example.v1.Query/CallbackCounters"
+	Query_Params_FullMethodName           = "/cosmosregistry.example.v1.Query/Params"
 )
 
 // QueryClient is the client API for Query service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QueryClient interface {
-	// Counter returns the current counter value.
-	Counter(ctx context.Context, in *QueryCounterRequest, opts ...grpc.CallOption) (*QueryCounterResponse, error)
-	// Counters returns all the counter values.
-	Counters(ctx context.Context, in *QueryCountersRequest, opts ...grpc.CallOption) (*QueryCountersResponse, error)
+	// CallbackCounter returns the current callback counter value.
+	CallbackCounter(ctx context.Context, in *QueryCallbackCounterRequest, opts ...grpc.CallOption) (*QueryCallbackCounterResponse, error)
+	// CallbackCounters returns all the counter values.
+	CallbackCounters(ctx context.Context, in *QueryCallbackCountersRequest, opts ...grpc.CallOption) (*QueryCallbackCountersResponse, error)
 	// Params returns the module parameters.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 }
@@ -44,18 +44,18 @@ func NewQueryClient(cc grpc.ClientConnInterface) QueryClient {
 	return &queryClient{cc}
 }
 
-func (c *queryClient) Counter(ctx context.Context, in *QueryCounterRequest, opts ...grpc.CallOption) (*QueryCounterResponse, error) {
-	out := new(QueryCounterResponse)
-	err := c.cc.Invoke(ctx, Query_Counter_FullMethodName, in, out, opts...)
+func (c *queryClient) CallbackCounter(ctx context.Context, in *QueryCallbackCounterRequest, opts ...grpc.CallOption) (*QueryCallbackCounterResponse, error) {
+	out := new(QueryCallbackCounterResponse)
+	err := c.cc.Invoke(ctx, Query_CallbackCounter_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) Counters(ctx context.Context, in *QueryCountersRequest, opts ...grpc.CallOption) (*QueryCountersResponse, error) {
-	out := new(QueryCountersResponse)
-	err := c.cc.Invoke(ctx, Query_Counters_FullMethodName, in, out, opts...)
+func (c *queryClient) CallbackCounters(ctx context.Context, in *QueryCallbackCountersRequest, opts ...grpc.CallOption) (*QueryCallbackCountersResponse, error) {
+	out := new(QueryCallbackCountersResponse)
+	err := c.cc.Invoke(ctx, Query_CallbackCounters_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,10 +75,10 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
 type QueryServer interface {
-	// Counter returns the current counter value.
-	Counter(context.Context, *QueryCounterRequest) (*QueryCounterResponse, error)
-	// Counters returns all the counter values.
-	Counters(context.Context, *QueryCountersRequest) (*QueryCountersResponse, error)
+	// CallbackCounter returns the current callback counter value.
+	CallbackCounter(context.Context, *QueryCallbackCounterRequest) (*QueryCallbackCounterResponse, error)
+	// CallbackCounters returns all the counter values.
+	CallbackCounters(context.Context, *QueryCallbackCountersRequest) (*QueryCallbackCountersResponse, error)
 	// Params returns the module parameters.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	mustEmbedUnimplementedQueryServer()
@@ -88,11 +88,11 @@ type QueryServer interface {
 type UnimplementedQueryServer struct {
 }
 
-func (UnimplementedQueryServer) Counter(context.Context, *QueryCounterRequest) (*QueryCounterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Counter not implemented")
+func (UnimplementedQueryServer) CallbackCounter(context.Context, *QueryCallbackCounterRequest) (*QueryCallbackCounterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CallbackCounter not implemented")
 }
-func (UnimplementedQueryServer) Counters(context.Context, *QueryCountersRequest) (*QueryCountersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Counters not implemented")
+func (UnimplementedQueryServer) CallbackCounters(context.Context, *QueryCallbackCountersRequest) (*QueryCallbackCountersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CallbackCounters not implemented")
 }
 func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
@@ -110,38 +110,38 @@ func RegisterQueryServer(s grpc.ServiceRegistrar, srv QueryServer) {
 	s.RegisterService(&Query_ServiceDesc, srv)
 }
 
-func _Query_Counter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCounterRequest)
+func _Query_CallbackCounter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCallbackCounterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Counter(ctx, in)
+		return srv.(QueryServer).CallbackCounter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Query_Counter_FullMethodName,
+		FullMethod: Query_CallbackCounter_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Counter(ctx, req.(*QueryCounterRequest))
+		return srv.(QueryServer).CallbackCounter(ctx, req.(*QueryCallbackCounterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_Counters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCountersRequest)
+func _Query_CallbackCounters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCallbackCountersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).Counters(ctx, in)
+		return srv.(QueryServer).CallbackCounters(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Query_Counters_FullMethodName,
+		FullMethod: Query_CallbackCounters_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).Counters(ctx, req.(*QueryCountersRequest))
+		return srv.(QueryServer).CallbackCounters(ctx, req.(*QueryCallbackCountersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -172,12 +172,12 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Counter",
-			Handler:    _Query_Counter_Handler,
+			MethodName: "CallbackCounter",
+			Handler:    _Query_CallbackCounter_Handler,
 		},
 		{
-			MethodName: "Counters",
-			Handler:    _Query_Counters_Handler,
+			MethodName: "CallbackCounters",
+			Handler:    _Query_CallbackCounters_Handler,
 		},
 		{
 			MethodName: "Params",

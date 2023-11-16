@@ -4,7 +4,6 @@ package examplev1
 import (
 	v1beta1 "cosmossdk.io/api/cosmos/base/query/v1beta1"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-proto"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/cosmos/cosmos-sdk/types/tx/amino"
@@ -19,25 +18,27 @@ import (
 )
 
 var (
-	md_QueryCounterRequest         protoreflect.MessageDescriptor
-	fd_QueryCounterRequest_address protoreflect.FieldDescriptor
+	md_QueryCallbackCounterRequest            protoreflect.MessageDescriptor
+	fd_QueryCallbackCounterRequest_port_id    protoreflect.FieldDescriptor
+	fd_QueryCallbackCounterRequest_channel_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_cosmosregistry_example_v1_query_proto_init()
-	md_QueryCounterRequest = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCounterRequest")
-	fd_QueryCounterRequest_address = md_QueryCounterRequest.Fields().ByName("address")
+	md_QueryCallbackCounterRequest = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCallbackCounterRequest")
+	fd_QueryCallbackCounterRequest_port_id = md_QueryCallbackCounterRequest.Fields().ByName("port_id")
+	fd_QueryCallbackCounterRequest_channel_id = md_QueryCallbackCounterRequest.Fields().ByName("channel_id")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryCounterRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryCallbackCounterRequest)(nil)
 
-type fastReflection_QueryCounterRequest QueryCounterRequest
+type fastReflection_QueryCallbackCounterRequest QueryCallbackCounterRequest
 
-func (x *QueryCounterRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryCounterRequest)(x)
+func (x *QueryCallbackCounterRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCounterRequest)(x)
 }
 
-func (x *QueryCounterRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryCallbackCounterRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -49,43 +50,43 @@ func (x *QueryCounterRequest) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryCounterRequest_messageType fastReflection_QueryCounterRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryCounterRequest_messageType{}
+var _fastReflection_QueryCallbackCounterRequest_messageType fastReflection_QueryCallbackCounterRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryCallbackCounterRequest_messageType{}
 
-type fastReflection_QueryCounterRequest_messageType struct{}
+type fastReflection_QueryCallbackCounterRequest_messageType struct{}
 
-func (x fastReflection_QueryCounterRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryCounterRequest)(nil)
+func (x fastReflection_QueryCallbackCounterRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCounterRequest)(nil)
 }
-func (x fastReflection_QueryCounterRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterRequest)
+func (x fastReflection_QueryCallbackCounterRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCounterRequest)
 }
-func (x fastReflection_QueryCounterRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterRequest
+func (x fastReflection_QueryCallbackCounterRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCounterRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryCounterRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterRequest
+func (x *fastReflection_QueryCallbackCounterRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCounterRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryCounterRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryCounterRequest_messageType
+func (x *fastReflection_QueryCallbackCounterRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryCallbackCounterRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryCounterRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterRequest)
+func (x *fastReflection_QueryCallbackCounterRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCounterRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryCounterRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryCounterRequest)(x)
+func (x *fastReflection_QueryCallbackCounterRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryCallbackCounterRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -93,10 +94,16 @@ func (x *fastReflection_QueryCounterRequest) Interface() protoreflect.ProtoMessa
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryCounterRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Address != "" {
-		value := protoreflect.ValueOfString(x.Address)
-		if !f(fd_QueryCounterRequest_address, value) {
+func (x *fastReflection_QueryCallbackCounterRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.PortId != "" {
+		value := protoreflect.ValueOfString(x.PortId)
+		if !f(fd_QueryCallbackCounterRequest_port_id, value) {
+			return
+		}
+	}
+	if x.ChannelId != "" {
+		value := protoreflect.ValueOfString(x.ChannelId)
+		if !f(fd_QueryCallbackCounterRequest_channel_id, value) {
 			return
 		}
 	}
@@ -113,15 +120,17 @@ func (x *fastReflection_QueryCounterRequest) Range(f func(protoreflect.FieldDesc
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryCounterRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryCallbackCounterRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterRequest.address":
-		return x.Address != ""
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.port_id":
+		return x.PortId != ""
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.channel_id":
+		return x.ChannelId != ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -131,15 +140,17 @@ func (x *fastReflection_QueryCounterRequest) Has(fd protoreflect.FieldDescriptor
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryCallbackCounterRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterRequest.address":
-		x.Address = ""
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.port_id":
+		x.PortId = ""
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.channel_id":
+		x.ChannelId = ""
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -149,16 +160,19 @@ func (x *fastReflection_QueryCounterRequest) Clear(fd protoreflect.FieldDescript
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryCounterRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCounterRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterRequest.address":
-		value := x.Address
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.port_id":
+		value := x.PortId
+		return protoreflect.ValueOfString(value)
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.channel_id":
+		value := x.ChannelId
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -172,15 +186,17 @@ func (x *fastReflection_QueryCounterRequest) Get(descriptor protoreflect.FieldDe
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryCallbackCounterRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterRequest.address":
-		x.Address = value.Interface().(string)
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.port_id":
+		x.PortId = value.Interface().(string)
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.channel_id":
+		x.ChannelId = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -194,40 +210,44 @@ func (x *fastReflection_QueryCounterRequest) Set(fd protoreflect.FieldDescriptor
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCounterRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterRequest.address":
-		panic(fmt.Errorf("field address of message cosmosregistry.example.v1.QueryCounterRequest is not mutable"))
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.port_id":
+		panic(fmt.Errorf("field port_id of message cosmosregistry.example.v1.QueryCallbackCounterRequest is not mutable"))
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.channel_id":
+		panic(fmt.Errorf("field channel_id of message cosmosregistry.example.v1.QueryCallbackCounterRequest is not mutable"))
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryCounterRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCounterRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterRequest.address":
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.port_id":
+		return protoreflect.ValueOfString("")
+	case "cosmosregistry.example.v1.QueryCallbackCounterRequest.channel_id":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryCounterRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryCallbackCounterRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCounterRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCallbackCounterRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -235,7 +255,7 @@ func (x *fastReflection_QueryCounterRequest) WhichOneof(d protoreflect.OneofDesc
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryCounterRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryCallbackCounterRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -246,7 +266,7 @@ func (x *fastReflection_QueryCounterRequest) GetUnknown() protoreflect.RawFields
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryCallbackCounterRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -258,7 +278,7 @@ func (x *fastReflection_QueryCounterRequest) SetUnknown(fields protoreflect.RawF
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryCounterRequest) IsValid() bool {
+func (x *fastReflection_QueryCallbackCounterRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -268,9 +288,9 @@ func (x *fastReflection_QueryCounterRequest) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryCallbackCounterRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryCounterRequest)
+		x := input.Message.Interface().(*QueryCallbackCounterRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -282,7 +302,11 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 		var n int
 		var l int
 		_ = l
-		l = len(x.Address)
+		l = len(x.PortId)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
+		l = len(x.ChannelId)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -296,7 +320,7 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterRequest)
+		x := input.Message.Interface().(*QueryCallbackCounterRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -315,10 +339,17 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Address) > 0 {
-			i -= len(x.Address)
-			copy(dAtA[i:], x.Address)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Address)))
+		if len(x.ChannelId) > 0 {
+			i -= len(x.ChannelId)
+			copy(dAtA[i:], x.ChannelId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ChannelId)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.PortId) > 0 {
+			i -= len(x.PortId)
+			copy(dAtA[i:], x.PortId)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.PortId)))
 			i--
 			dAtA[i] = 0xa
 		}
@@ -333,7 +364,7 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterRequest)
+		x := input.Message.Interface().(*QueryCallbackCounterRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -365,15 +396,15 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCounterRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCounterRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
 				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Address", wireType)
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field PortId", wireType)
 				}
 				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
@@ -401,7 +432,39 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Address = string(dAtA[iNdEx:postIndex])
+				x.PortId = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ChannelId", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ChannelId = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -439,25 +502,25 @@ func (x *fastReflection_QueryCounterRequest) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_QueryCounterResponse         protoreflect.MessageDescriptor
-	fd_QueryCounterResponse_counter protoreflect.FieldDescriptor
+	md_QueryCallbackCounterResponse         protoreflect.MessageDescriptor
+	fd_QueryCallbackCounterResponse_counter protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_cosmosregistry_example_v1_query_proto_init()
-	md_QueryCounterResponse = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCounterResponse")
-	fd_QueryCounterResponse_counter = md_QueryCounterResponse.Fields().ByName("counter")
+	md_QueryCallbackCounterResponse = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCallbackCounterResponse")
+	fd_QueryCallbackCounterResponse_counter = md_QueryCallbackCounterResponse.Fields().ByName("counter")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryCounterResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryCallbackCounterResponse)(nil)
 
-type fastReflection_QueryCounterResponse QueryCounterResponse
+type fastReflection_QueryCallbackCounterResponse QueryCallbackCounterResponse
 
-func (x *QueryCounterResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryCounterResponse)(x)
+func (x *QueryCallbackCounterResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCounterResponse)(x)
 }
 
-func (x *QueryCounterResponse) slowProtoReflect() protoreflect.Message {
+func (x *QueryCallbackCounterResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -469,43 +532,43 @@ func (x *QueryCounterResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryCounterResponse_messageType fastReflection_QueryCounterResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryCounterResponse_messageType{}
+var _fastReflection_QueryCallbackCounterResponse_messageType fastReflection_QueryCallbackCounterResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryCallbackCounterResponse_messageType{}
 
-type fastReflection_QueryCounterResponse_messageType struct{}
+type fastReflection_QueryCallbackCounterResponse_messageType struct{}
 
-func (x fastReflection_QueryCounterResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryCounterResponse)(nil)
+func (x fastReflection_QueryCallbackCounterResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCounterResponse)(nil)
 }
-func (x fastReflection_QueryCounterResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterResponse)
+func (x fastReflection_QueryCallbackCounterResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCounterResponse)
 }
-func (x fastReflection_QueryCounterResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterResponse
+func (x fastReflection_QueryCallbackCounterResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCounterResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryCounterResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCounterResponse
+func (x *fastReflection_QueryCallbackCounterResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCounterResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryCounterResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryCounterResponse_messageType
+func (x *fastReflection_QueryCallbackCounterResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryCallbackCounterResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryCounterResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryCounterResponse)
+func (x *fastReflection_QueryCallbackCounterResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCounterResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryCounterResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryCounterResponse)(x)
+func (x *fastReflection_QueryCallbackCounterResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryCallbackCounterResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -513,10 +576,10 @@ func (x *fastReflection_QueryCounterResponse) Interface() protoreflect.ProtoMess
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryCounterResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
-	if x.Counter != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.Counter)
-		if !f(fd_QueryCounterResponse_counter, value) {
+func (x *fastReflection_QueryCallbackCounterResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Counter != nil {
+		value := protoreflect.ValueOfMessage(x.Counter.ProtoReflect())
+		if !f(fd_QueryCallbackCounterResponse_counter, value) {
 			return
 		}
 	}
@@ -533,15 +596,15 @@ func (x *fastReflection_QueryCounterResponse) Range(f func(protoreflect.FieldDes
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryCounterResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryCallbackCounterResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterResponse.counter":
-		return x.Counter != uint64(0)
+	case "cosmosregistry.example.v1.QueryCallbackCounterResponse.counter":
+		return x.Counter != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -551,15 +614,15 @@ func (x *fastReflection_QueryCounterResponse) Has(fd protoreflect.FieldDescripto
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryCallbackCounterResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterResponse.counter":
-		x.Counter = uint64(0)
+	case "cosmosregistry.example.v1.QueryCallbackCounterResponse.counter":
+		x.Counter = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -569,16 +632,16 @@ func (x *fastReflection_QueryCounterResponse) Clear(fd protoreflect.FieldDescrip
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryCounterResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCounterResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterResponse.counter":
+	case "cosmosregistry.example.v1.QueryCallbackCounterResponse.counter":
 		value := x.Counter
-		return protoreflect.ValueOfUint64(value)
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -592,15 +655,15 @@ func (x *fastReflection_QueryCounterResponse) Get(descriptor protoreflect.FieldD
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryCallbackCounterResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterResponse.counter":
-		x.Counter = value.Uint()
+	case "cosmosregistry.example.v1.QueryCallbackCounterResponse.counter":
+		x.Counter = value.Message().Interface().(*CallbackCounter)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -614,40 +677,44 @@ func (x *fastReflection_QueryCounterResponse) Set(fd protoreflect.FieldDescripto
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCounterResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterResponse.counter":
-		panic(fmt.Errorf("field counter of message cosmosregistry.example.v1.QueryCounterResponse is not mutable"))
+	case "cosmosregistry.example.v1.QueryCallbackCounterResponse.counter":
+		if x.Counter == nil {
+			x.Counter = new(CallbackCounter)
+		}
+		return protoreflect.ValueOfMessage(x.Counter.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryCounterResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCounterResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCounterResponse.counter":
-		return protoreflect.ValueOfUint64(uint64(0))
+	case "cosmosregistry.example.v1.QueryCallbackCounterResponse.counter":
+		m := new(CallbackCounter)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCounterResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCounterResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCounterResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCounterResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryCounterResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryCallbackCounterResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCounterResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCallbackCounterResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -655,7 +722,7 @@ func (x *fastReflection_QueryCounterResponse) WhichOneof(d protoreflect.OneofDes
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryCounterResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryCallbackCounterResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -666,7 +733,7 @@ func (x *fastReflection_QueryCounterResponse) GetUnknown() protoreflect.RawField
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCounterResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryCallbackCounterResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -678,7 +745,7 @@ func (x *fastReflection_QueryCounterResponse) SetUnknown(fields protoreflect.Raw
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryCounterResponse) IsValid() bool {
+func (x *fastReflection_QueryCallbackCounterResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -688,9 +755,9 @@ func (x *fastReflection_QueryCounterResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryCallbackCounterResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryCounterResponse)
+		x := input.Message.Interface().(*QueryCallbackCounterResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -702,8 +769,9 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 		var n int
 		var l int
 		_ = l
-		if x.Counter != 0 {
-			n += 1 + runtime.Sov(uint64(x.Counter))
+		if x.Counter != nil {
+			l = options.Size(x.Counter)
+			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
@@ -715,7 +783,7 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterResponse)
+		x := input.Message.Interface().(*QueryCallbackCounterResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -734,10 +802,19 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if x.Counter != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.Counter))
+		if x.Counter != nil {
+			encoded, err := options.Marshal(x.Counter)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
 			i--
-			dAtA[i] = 0x8
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -750,7 +827,7 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCounterResponse)
+		x := input.Message.Interface().(*QueryCallbackCounterResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -782,17 +859,17 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCounterResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCounterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCounterResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
-				if wireType != 0 {
+				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Counter", wireType)
 				}
-				x.Counter = 0
+				var msglen int
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -802,11 +879,28 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.Counter |= uint64(b&0x7F) << shift
+					msglen |= int(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Counter == nil {
+					x.Counter = &CallbackCounter{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Counter); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -843,25 +937,25 @@ func (x *fastReflection_QueryCounterResponse) ProtoMethods() *protoiface.Methods
 }
 
 var (
-	md_QueryCountersRequest            protoreflect.MessageDescriptor
-	fd_QueryCountersRequest_pagination protoreflect.FieldDescriptor
+	md_QueryCallbackCountersRequest            protoreflect.MessageDescriptor
+	fd_QueryCallbackCountersRequest_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_cosmosregistry_example_v1_query_proto_init()
-	md_QueryCountersRequest = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCountersRequest")
-	fd_QueryCountersRequest_pagination = md_QueryCountersRequest.Fields().ByName("pagination")
+	md_QueryCallbackCountersRequest = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCallbackCountersRequest")
+	fd_QueryCallbackCountersRequest_pagination = md_QueryCallbackCountersRequest.Fields().ByName("pagination")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryCountersRequest)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryCallbackCountersRequest)(nil)
 
-type fastReflection_QueryCountersRequest QueryCountersRequest
+type fastReflection_QueryCallbackCountersRequest QueryCallbackCountersRequest
 
-func (x *QueryCountersRequest) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryCountersRequest)(x)
+func (x *QueryCallbackCountersRequest) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCountersRequest)(x)
 }
 
-func (x *QueryCountersRequest) slowProtoReflect() protoreflect.Message {
+func (x *QueryCallbackCountersRequest) slowProtoReflect() protoreflect.Message {
 	mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -873,43 +967,43 @@ func (x *QueryCountersRequest) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryCountersRequest_messageType fastReflection_QueryCountersRequest_messageType
-var _ protoreflect.MessageType = fastReflection_QueryCountersRequest_messageType{}
+var _fastReflection_QueryCallbackCountersRequest_messageType fastReflection_QueryCallbackCountersRequest_messageType
+var _ protoreflect.MessageType = fastReflection_QueryCallbackCountersRequest_messageType{}
 
-type fastReflection_QueryCountersRequest_messageType struct{}
+type fastReflection_QueryCallbackCountersRequest_messageType struct{}
 
-func (x fastReflection_QueryCountersRequest_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryCountersRequest)(nil)
+func (x fastReflection_QueryCallbackCountersRequest_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCountersRequest)(nil)
 }
-func (x fastReflection_QueryCountersRequest_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryCountersRequest)
+func (x fastReflection_QueryCallbackCountersRequest_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCountersRequest)
 }
-func (x fastReflection_QueryCountersRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCountersRequest
+func (x fastReflection_QueryCallbackCountersRequest_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCountersRequest
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryCountersRequest) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCountersRequest
+func (x *fastReflection_QueryCallbackCountersRequest) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCountersRequest
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryCountersRequest) Type() protoreflect.MessageType {
-	return _fastReflection_QueryCountersRequest_messageType
+func (x *fastReflection_QueryCallbackCountersRequest) Type() protoreflect.MessageType {
+	return _fastReflection_QueryCallbackCountersRequest_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryCountersRequest) New() protoreflect.Message {
-	return new(fastReflection_QueryCountersRequest)
+func (x *fastReflection_QueryCallbackCountersRequest) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCountersRequest)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryCountersRequest) Interface() protoreflect.ProtoMessage {
-	return (*QueryCountersRequest)(x)
+func (x *fastReflection_QueryCallbackCountersRequest) Interface() protoreflect.ProtoMessage {
+	return (*QueryCallbackCountersRequest)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -917,10 +1011,10 @@ func (x *fastReflection_QueryCountersRequest) Interface() protoreflect.ProtoMess
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryCountersRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_QueryCallbackCountersRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if x.Pagination != nil {
 		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
-		if !f(fd_QueryCountersRequest_pagination, value) {
+		if !f(fd_QueryCallbackCountersRequest_pagination, value) {
 			return
 		}
 	}
@@ -937,15 +1031,15 @@ func (x *fastReflection_QueryCountersRequest) Range(f func(protoreflect.FieldDes
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryCountersRequest) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryCallbackCountersRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersRequest.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination":
 		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -955,15 +1049,15 @@ func (x *fastReflection_QueryCountersRequest) Has(fd protoreflect.FieldDescripto
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersRequest) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryCallbackCountersRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersRequest.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination":
 		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -973,16 +1067,16 @@ func (x *fastReflection_QueryCountersRequest) Clear(fd protoreflect.FieldDescrip
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryCountersRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCountersRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersRequest.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination":
 		value := x.Pagination
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersRequest does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersRequest does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -996,15 +1090,15 @@ func (x *fastReflection_QueryCountersRequest) Get(descriptor protoreflect.FieldD
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryCallbackCountersRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersRequest.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination":
 		x.Pagination = value.Message().Interface().(*v1beta1.PageRequest)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersRequest does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1018,44 +1112,44 @@ func (x *fastReflection_QueryCountersRequest) Set(fd protoreflect.FieldDescripto
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCountersRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersRequest.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination":
 		if x.Pagination == nil {
 			x.Pagination = new(v1beta1.PageRequest)
 		}
 		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryCountersRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCountersRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersRequest.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination":
 		m := new(v1beta1.PageRequest)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersRequest"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersRequest"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersRequest does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersRequest does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryCountersRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryCallbackCountersRequest) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCountersRequest", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCallbackCountersRequest", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1063,7 +1157,7 @@ func (x *fastReflection_QueryCountersRequest) WhichOneof(d protoreflect.OneofDes
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryCountersRequest) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryCallbackCountersRequest) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1074,7 +1168,7 @@ func (x *fastReflection_QueryCountersRequest) GetUnknown() protoreflect.RawField
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersRequest) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryCallbackCountersRequest) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1086,7 +1180,7 @@ func (x *fastReflection_QueryCountersRequest) SetUnknown(fields protoreflect.Raw
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryCountersRequest) IsValid() bool {
+func (x *fastReflection_QueryCallbackCountersRequest) IsValid() bool {
 	return x != nil
 }
 
@@ -1096,9 +1190,9 @@ func (x *fastReflection_QueryCountersRequest) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryCountersRequest) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryCallbackCountersRequest) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryCountersRequest)
+		x := input.Message.Interface().(*QueryCallbackCountersRequest)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1124,7 +1218,7 @@ func (x *fastReflection_QueryCountersRequest) ProtoMethods() *protoiface.Methods
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCountersRequest)
+		x := input.Message.Interface().(*QueryCallbackCountersRequest)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1168,7 +1262,7 @@ func (x *fastReflection_QueryCountersRequest) ProtoMethods() *protoiface.Methods
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCountersRequest)
+		x := input.Message.Interface().(*QueryCallbackCountersRequest)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1200,10 +1294,10 @@ func (x *fastReflection_QueryCountersRequest) ProtoMethods() *protoiface.Methods
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountersRequest: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCountersRequest: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCountersRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -1277,79 +1371,79 @@ func (x *fastReflection_QueryCountersRequest) ProtoMethods() *protoiface.Methods
 	}
 }
 
-var _ protoreflect.List = (*_QueryCountersResponse_1_list)(nil)
+var _ protoreflect.List = (*_QueryCallbackCountersResponse_1_list)(nil)
 
-type _QueryCountersResponse_1_list struct {
-	list *[]*Counter
+type _QueryCallbackCountersResponse_1_list struct {
+	list *[]*CallbackCounter
 }
 
-func (x *_QueryCountersResponse_1_list) Len() int {
+func (x *_QueryCallbackCountersResponse_1_list) Len() int {
 	if x.list == nil {
 		return 0
 	}
 	return len(*x.list)
 }
 
-func (x *_QueryCountersResponse_1_list) Get(i int) protoreflect.Value {
+func (x *_QueryCallbackCountersResponse_1_list) Get(i int) protoreflect.Value {
 	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
 }
 
-func (x *_QueryCountersResponse_1_list) Set(i int, value protoreflect.Value) {
+func (x *_QueryCallbackCountersResponse_1_list) Set(i int, value protoreflect.Value) {
 	valueUnwrapped := value.Message()
-	concreteValue := valueUnwrapped.Interface().(*Counter)
+	concreteValue := valueUnwrapped.Interface().(*CallbackCounter)
 	(*x.list)[i] = concreteValue
 }
 
-func (x *_QueryCountersResponse_1_list) Append(value protoreflect.Value) {
+func (x *_QueryCallbackCountersResponse_1_list) Append(value protoreflect.Value) {
 	valueUnwrapped := value.Message()
-	concreteValue := valueUnwrapped.Interface().(*Counter)
+	concreteValue := valueUnwrapped.Interface().(*CallbackCounter)
 	*x.list = append(*x.list, concreteValue)
 }
 
-func (x *_QueryCountersResponse_1_list) AppendMutable() protoreflect.Value {
-	v := new(Counter)
+func (x *_QueryCallbackCountersResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(CallbackCounter)
 	*x.list = append(*x.list, v)
 	return protoreflect.ValueOfMessage(v.ProtoReflect())
 }
 
-func (x *_QueryCountersResponse_1_list) Truncate(n int) {
+func (x *_QueryCallbackCountersResponse_1_list) Truncate(n int) {
 	for i := n; i < len(*x.list); i++ {
 		(*x.list)[i] = nil
 	}
 	*x.list = (*x.list)[:n]
 }
 
-func (x *_QueryCountersResponse_1_list) NewElement() protoreflect.Value {
-	v := new(Counter)
+func (x *_QueryCallbackCountersResponse_1_list) NewElement() protoreflect.Value {
+	v := new(CallbackCounter)
 	return protoreflect.ValueOfMessage(v.ProtoReflect())
 }
 
-func (x *_QueryCountersResponse_1_list) IsValid() bool {
+func (x *_QueryCallbackCountersResponse_1_list) IsValid() bool {
 	return x.list != nil
 }
 
 var (
-	md_QueryCountersResponse            protoreflect.MessageDescriptor
-	fd_QueryCountersResponse_counters   protoreflect.FieldDescriptor
-	fd_QueryCountersResponse_pagination protoreflect.FieldDescriptor
+	md_QueryCallbackCountersResponse            protoreflect.MessageDescriptor
+	fd_QueryCallbackCountersResponse_counters   protoreflect.FieldDescriptor
+	fd_QueryCallbackCountersResponse_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_cosmosregistry_example_v1_query_proto_init()
-	md_QueryCountersResponse = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCountersResponse")
-	fd_QueryCountersResponse_counters = md_QueryCountersResponse.Fields().ByName("counters")
-	fd_QueryCountersResponse_pagination = md_QueryCountersResponse.Fields().ByName("pagination")
+	md_QueryCallbackCountersResponse = File_cosmosregistry_example_v1_query_proto.Messages().ByName("QueryCallbackCountersResponse")
+	fd_QueryCallbackCountersResponse_counters = md_QueryCallbackCountersResponse.Fields().ByName("counters")
+	fd_QueryCallbackCountersResponse_pagination = md_QueryCallbackCountersResponse.Fields().ByName("pagination")
 }
 
-var _ protoreflect.Message = (*fastReflection_QueryCountersResponse)(nil)
+var _ protoreflect.Message = (*fastReflection_QueryCallbackCountersResponse)(nil)
 
-type fastReflection_QueryCountersResponse QueryCountersResponse
+type fastReflection_QueryCallbackCountersResponse QueryCallbackCountersResponse
 
-func (x *QueryCountersResponse) ProtoReflect() protoreflect.Message {
-	return (*fastReflection_QueryCountersResponse)(x)
+func (x *QueryCallbackCountersResponse) ProtoReflect() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCountersResponse)(x)
 }
 
-func (x *QueryCountersResponse) slowProtoReflect() protoreflect.Message {
+func (x *QueryCallbackCountersResponse) slowProtoReflect() protoreflect.Message {
 	mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1361,43 +1455,43 @@ func (x *QueryCountersResponse) slowProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-var _fastReflection_QueryCountersResponse_messageType fastReflection_QueryCountersResponse_messageType
-var _ protoreflect.MessageType = fastReflection_QueryCountersResponse_messageType{}
+var _fastReflection_QueryCallbackCountersResponse_messageType fastReflection_QueryCallbackCountersResponse_messageType
+var _ protoreflect.MessageType = fastReflection_QueryCallbackCountersResponse_messageType{}
 
-type fastReflection_QueryCountersResponse_messageType struct{}
+type fastReflection_QueryCallbackCountersResponse_messageType struct{}
 
-func (x fastReflection_QueryCountersResponse_messageType) Zero() protoreflect.Message {
-	return (*fastReflection_QueryCountersResponse)(nil)
+func (x fastReflection_QueryCallbackCountersResponse_messageType) Zero() protoreflect.Message {
+	return (*fastReflection_QueryCallbackCountersResponse)(nil)
 }
-func (x fastReflection_QueryCountersResponse_messageType) New() protoreflect.Message {
-	return new(fastReflection_QueryCountersResponse)
+func (x fastReflection_QueryCallbackCountersResponse_messageType) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCountersResponse)
 }
-func (x fastReflection_QueryCountersResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCountersResponse
+func (x fastReflection_QueryCallbackCountersResponse_messageType) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCountersResponse
 }
 
 // Descriptor returns message descriptor, which contains only the protobuf
 // type information for the message.
-func (x *fastReflection_QueryCountersResponse) Descriptor() protoreflect.MessageDescriptor {
-	return md_QueryCountersResponse
+func (x *fastReflection_QueryCallbackCountersResponse) Descriptor() protoreflect.MessageDescriptor {
+	return md_QueryCallbackCountersResponse
 }
 
 // Type returns the message type, which encapsulates both Go and protobuf
 // type information. If the Go type information is not needed,
 // it is recommended that the message descriptor be used instead.
-func (x *fastReflection_QueryCountersResponse) Type() protoreflect.MessageType {
-	return _fastReflection_QueryCountersResponse_messageType
+func (x *fastReflection_QueryCallbackCountersResponse) Type() protoreflect.MessageType {
+	return _fastReflection_QueryCallbackCountersResponse_messageType
 }
 
 // New returns a newly allocated and mutable empty message.
-func (x *fastReflection_QueryCountersResponse) New() protoreflect.Message {
-	return new(fastReflection_QueryCountersResponse)
+func (x *fastReflection_QueryCallbackCountersResponse) New() protoreflect.Message {
+	return new(fastReflection_QueryCallbackCountersResponse)
 }
 
 // Interface unwraps the message reflection interface and
 // returns the underlying ProtoMessage interface.
-func (x *fastReflection_QueryCountersResponse) Interface() protoreflect.ProtoMessage {
-	return (*QueryCountersResponse)(x)
+func (x *fastReflection_QueryCallbackCountersResponse) Interface() protoreflect.ProtoMessage {
+	return (*QueryCallbackCountersResponse)(x)
 }
 
 // Range iterates over every populated field in an undefined order,
@@ -1405,16 +1499,16 @@ func (x *fastReflection_QueryCountersResponse) Interface() protoreflect.ProtoMes
 // Range returns immediately if f returns false.
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
-func (x *fastReflection_QueryCountersResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+func (x *fastReflection_QueryCallbackCountersResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
 	if len(x.Counters) != 0 {
-		value := protoreflect.ValueOfList(&_QueryCountersResponse_1_list{list: &x.Counters})
-		if !f(fd_QueryCountersResponse_counters, value) {
+		value := protoreflect.ValueOfList(&_QueryCallbackCountersResponse_1_list{list: &x.Counters})
+		if !f(fd_QueryCallbackCountersResponse_counters, value) {
 			return
 		}
 	}
 	if x.Pagination != nil {
 		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
-		if !f(fd_QueryCountersResponse_pagination, value) {
+		if !f(fd_QueryCallbackCountersResponse_pagination, value) {
 			return
 		}
 	}
@@ -1431,17 +1525,17 @@ func (x *fastReflection_QueryCountersResponse) Range(f func(protoreflect.FieldDe
 // In other cases (aside from the nullable cases above),
 // a proto3 scalar field is populated if it contains a non-zero value, and
 // a repeated field is populated if it is non-empty.
-func (x *fastReflection_QueryCountersResponse) Has(fd protoreflect.FieldDescriptor) bool {
+func (x *fastReflection_QueryCallbackCountersResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersResponse.counters":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.counters":
 		return len(x.Counters) != 0
-	case "cosmosregistry.example.v1.QueryCountersResponse.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination":
 		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1451,17 +1545,17 @@ func (x *fastReflection_QueryCountersResponse) Has(fd protoreflect.FieldDescript
 // associated with the given field number.
 //
 // Clear is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersResponse) Clear(fd protoreflect.FieldDescriptor) {
+func (x *fastReflection_QueryCallbackCountersResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersResponse.counters":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.counters":
 		x.Counters = nil
-	case "cosmosregistry.example.v1.QueryCountersResponse.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination":
 		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1471,22 +1565,22 @@ func (x *fastReflection_QueryCountersResponse) Clear(fd protoreflect.FieldDescri
 // the default value of a bytes scalar is guaranteed to be a copy.
 // For unpopulated composite types, it returns an empty, read-only view
 // of the value; to obtain a mutable reference, use Mutable.
-func (x *fastReflection_QueryCountersResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCountersResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersResponse.counters":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.counters":
 		if len(x.Counters) == 0 {
-			return protoreflect.ValueOfList(&_QueryCountersResponse_1_list{})
+			return protoreflect.ValueOfList(&_QueryCallbackCountersResponse_1_list{})
 		}
-		listValue := &_QueryCountersResponse_1_list{list: &x.Counters}
+		listValue := &_QueryCallbackCountersResponse_1_list{list: &x.Counters}
 		return protoreflect.ValueOfList(listValue)
-	case "cosmosregistry.example.v1.QueryCountersResponse.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination":
 		value := x.Pagination
 		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersResponse does not contain field %s", descriptor.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersResponse does not contain field %s", descriptor.FullName()))
 	}
 }
 
@@ -1500,19 +1594,19 @@ func (x *fastReflection_QueryCountersResponse) Get(descriptor protoreflect.Field
 // empty, read-only value, then it panics.
 //
 // Set is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
+func (x *fastReflection_QueryCallbackCountersResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersResponse.counters":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.counters":
 		lv := value.List()
-		clv := lv.(*_QueryCountersResponse_1_list)
+		clv := lv.(*_QueryCallbackCountersResponse_1_list)
 		x.Counters = *clv.list
-	case "cosmosregistry.example.v1.QueryCountersResponse.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination":
 		x.Pagination = value.Message().Interface().(*v1beta1.PageResponse)
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersResponse does not contain field %s", fd.FullName()))
 	}
 }
 
@@ -1526,53 +1620,53 @@ func (x *fastReflection_QueryCountersResponse) Set(fd protoreflect.FieldDescript
 // It panics if the field does not contain a composite type.
 //
 // Mutable is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCountersResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersResponse.counters":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.counters":
 		if x.Counters == nil {
-			x.Counters = []*Counter{}
+			x.Counters = []*CallbackCounter{}
 		}
-		value := &_QueryCountersResponse_1_list{list: &x.Counters}
+		value := &_QueryCallbackCountersResponse_1_list{list: &x.Counters}
 		return protoreflect.ValueOfList(value)
-	case "cosmosregistry.example.v1.QueryCountersResponse.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination":
 		if x.Pagination == nil {
 			x.Pagination = new(v1beta1.PageResponse)
 		}
 		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // NewField returns a new value that is assignable to the field
 // for the given descriptor. For scalars, this returns the default value.
 // For lists, maps, and messages, this returns a new, empty, mutable value.
-func (x *fastReflection_QueryCountersResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
+func (x *fastReflection_QueryCallbackCountersResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
-	case "cosmosregistry.example.v1.QueryCountersResponse.counters":
-		list := []*Counter{}
-		return protoreflect.ValueOfList(&_QueryCountersResponse_1_list{list: &list})
-	case "cosmosregistry.example.v1.QueryCountersResponse.pagination":
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.counters":
+		list := []*CallbackCounter{}
+		return protoreflect.ValueOfList(&_QueryCallbackCountersResponse_1_list{list: &list})
+	case "cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination":
 		m := new(v1beta1.PageResponse)
 		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
-			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCountersResponse"))
+			panic(fmt.Errorf("proto3 declared messages do not support extensions: cosmosregistry.example.v1.QueryCallbackCountersResponse"))
 		}
-		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCountersResponse does not contain field %s", fd.FullName()))
+		panic(fmt.Errorf("message cosmosregistry.example.v1.QueryCallbackCountersResponse does not contain field %s", fd.FullName()))
 	}
 }
 
 // WhichOneof reports which field within the oneof is populated,
 // returning nil if none are populated.
 // It panics if the oneof descriptor does not belong to this message.
-func (x *fastReflection_QueryCountersResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
+func (x *fastReflection_QueryCallbackCountersResponse) WhichOneof(d protoreflect.OneofDescriptor) protoreflect.FieldDescriptor {
 	switch d.FullName() {
 	default:
-		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCountersResponse", d.FullName()))
+		panic(fmt.Errorf("%s is not a oneof field in cosmosregistry.example.v1.QueryCallbackCountersResponse", d.FullName()))
 	}
 	panic("unreachable")
 }
@@ -1580,7 +1674,7 @@ func (x *fastReflection_QueryCountersResponse) WhichOneof(d protoreflect.OneofDe
 // GetUnknown retrieves the entire list of unknown fields.
 // The caller may only mutate the contents of the RawFields
 // if the mutated bytes are stored back into the message with SetUnknown.
-func (x *fastReflection_QueryCountersResponse) GetUnknown() protoreflect.RawFields {
+func (x *fastReflection_QueryCallbackCountersResponse) GetUnknown() protoreflect.RawFields {
 	return x.unknownFields
 }
 
@@ -1591,7 +1685,7 @@ func (x *fastReflection_QueryCountersResponse) GetUnknown() protoreflect.RawFiel
 // An empty RawFields may be passed to clear the fields.
 //
 // SetUnknown is a mutating operation and unsafe for concurrent use.
-func (x *fastReflection_QueryCountersResponse) SetUnknown(fields protoreflect.RawFields) {
+func (x *fastReflection_QueryCallbackCountersResponse) SetUnknown(fields protoreflect.RawFields) {
 	x.unknownFields = fields
 }
 
@@ -1603,7 +1697,7 @@ func (x *fastReflection_QueryCountersResponse) SetUnknown(fields protoreflect.Ra
 // message type, but the details are implementation dependent.
 // Validity is not part of the protobuf data model, and may not
 // be preserved in marshaling or other operations.
-func (x *fastReflection_QueryCountersResponse) IsValid() bool {
+func (x *fastReflection_QueryCallbackCountersResponse) IsValid() bool {
 	return x != nil
 }
 
@@ -1613,9 +1707,9 @@ func (x *fastReflection_QueryCountersResponse) IsValid() bool {
 // The returned methods type is identical to
 // "google.golang.org/protobuf/runtime/protoiface".Methods.
 // Consult the protoiface package documentation for details.
-func (x *fastReflection_QueryCountersResponse) ProtoMethods() *protoiface.Methods {
+func (x *fastReflection_QueryCallbackCountersResponse) ProtoMethods() *protoiface.Methods {
 	size := func(input protoiface.SizeInput) protoiface.SizeOutput {
-		x := input.Message.Interface().(*QueryCountersResponse)
+		x := input.Message.Interface().(*QueryCallbackCountersResponse)
 		if x == nil {
 			return protoiface.SizeOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1647,7 +1741,7 @@ func (x *fastReflection_QueryCountersResponse) ProtoMethods() *protoiface.Method
 	}
 
 	marshal := func(input protoiface.MarshalInput) (protoiface.MarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCountersResponse)
+		x := input.Message.Interface().(*QueryCallbackCountersResponse)
 		if x == nil {
 			return protoiface.MarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1707,7 +1801,7 @@ func (x *fastReflection_QueryCountersResponse) ProtoMethods() *protoiface.Method
 		}, nil
 	}
 	unmarshal := func(input protoiface.UnmarshalInput) (protoiface.UnmarshalOutput, error) {
-		x := input.Message.Interface().(*QueryCountersResponse)
+		x := input.Message.Interface().(*QueryCallbackCountersResponse)
 		if x == nil {
 			return protoiface.UnmarshalOutput{
 				NoUnkeyedLiterals: input.NoUnkeyedLiterals,
@@ -1739,10 +1833,10 @@ func (x *fastReflection_QueryCountersResponse) ProtoMethods() *protoiface.Method
 			fieldNum := int32(wire >> 3)
 			wireType := int(wire & 0x7)
 			if wireType == 4 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountersResponse: wiretype end group for non-group")
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCountersResponse: wiretype end group for non-group")
 			}
 			if fieldNum <= 0 {
-				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCountersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryCallbackCountersResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
 			case 1:
@@ -1774,7 +1868,7 @@ func (x *fastReflection_QueryCountersResponse) ProtoMethods() *protoiface.Method
 				if postIndex > l {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
-				x.Counters = append(x.Counters, &Counter{})
+				x.Counters = append(x.Counters, &CallbackCounter{})
 				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Counters[len(x.Counters)-1]); err != nil {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
 				}
@@ -2654,19 +2748,21 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// QueryCounterRequest is the request type for the Query/Counter RPC
+// QueryCallbackCounterRequest is the request type for the Query/Counter RPC
 // method.
-type QueryCounterRequest struct {
+type QueryCallbackCounterRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// address defines the address to query for the counter.
-	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// port_id defines the port_id to query for the counter.
+	PortId string `protobuf:"bytes,1,opt,name=port_id,json=portId,proto3" json:"port_id,omitempty"`
+	// channel_id defines the channel_id to query for the counter.
+	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 }
 
-func (x *QueryCounterRequest) Reset() {
-	*x = QueryCounterRequest{}
+func (x *QueryCallbackCounterRequest) Reset() {
+	*x = QueryCallbackCounterRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2674,37 +2770,44 @@ func (x *QueryCounterRequest) Reset() {
 	}
 }
 
-func (x *QueryCounterRequest) String() string {
+func (x *QueryCallbackCounterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryCounterRequest) ProtoMessage() {}
+func (*QueryCallbackCounterRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryCounterRequest.ProtoReflect.Descriptor instead.
-func (*QueryCounterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryCallbackCounterRequest.ProtoReflect.Descriptor instead.
+func (*QueryCallbackCounterRequest) Descriptor() ([]byte, []int) {
 	return file_cosmosregistry_example_v1_query_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *QueryCounterRequest) GetAddress() string {
+func (x *QueryCallbackCounterRequest) GetPortId() string {
 	if x != nil {
-		return x.Address
+		return x.PortId
 	}
 	return ""
 }
 
-// QueryCounterResponse is the response type for the Query/Counter RPC
+func (x *QueryCallbackCounterRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+// QueryCallbackCounterResponse is the response type for the Query/Counter RPC
 // method.
-type QueryCounterResponse struct {
+type QueryCallbackCounterResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// counter defines the current counter for the sender.
-	Counter uint64 `protobuf:"varint,1,opt,name=counter,proto3" json:"counter,omitempty"`
+	Counter *CallbackCounter `protobuf:"bytes,1,opt,name=counter,proto3" json:"counter,omitempty"`
 }
 
-func (x *QueryCounterResponse) Reset() {
-	*x = QueryCounterResponse{}
+func (x *QueryCallbackCounterResponse) Reset() {
+	*x = QueryCallbackCounterResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2712,26 +2815,26 @@ func (x *QueryCounterResponse) Reset() {
 	}
 }
 
-func (x *QueryCounterResponse) String() string {
+func (x *QueryCallbackCounterResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryCounterResponse) ProtoMessage() {}
+func (*QueryCallbackCounterResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryCounterResponse.ProtoReflect.Descriptor instead.
-func (*QueryCounterResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryCallbackCounterResponse.ProtoReflect.Descriptor instead.
+func (*QueryCallbackCounterResponse) Descriptor() ([]byte, []int) {
 	return file_cosmosregistry_example_v1_query_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *QueryCounterResponse) GetCounter() uint64 {
+func (x *QueryCallbackCounterResponse) GetCounter() *CallbackCounter {
 	if x != nil {
 		return x.Counter
 	}
-	return 0
+	return nil
 }
 
-// QueryCountersResponse is the request type for the Query/Counters RPC
-type QueryCountersRequest struct {
+// QueryCallbackCountersRequest is the request type for the Query/Counters RPC
+type QueryCallbackCountersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2740,8 +2843,8 @@ type QueryCountersRequest struct {
 	Pagination *v1beta1.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (x *QueryCountersRequest) Reset() {
-	*x = QueryCountersRequest{}
+func (x *QueryCallbackCountersRequest) Reset() {
+	*x = QueryCallbackCountersRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2749,39 +2852,39 @@ func (x *QueryCountersRequest) Reset() {
 	}
 }
 
-func (x *QueryCountersRequest) String() string {
+func (x *QueryCallbackCountersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryCountersRequest) ProtoMessage() {}
+func (*QueryCallbackCountersRequest) ProtoMessage() {}
 
-// Deprecated: Use QueryCountersRequest.ProtoReflect.Descriptor instead.
-func (*QueryCountersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryCallbackCountersRequest.ProtoReflect.Descriptor instead.
+func (*QueryCallbackCountersRequest) Descriptor() ([]byte, []int) {
 	return file_cosmosregistry_example_v1_query_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *QueryCountersRequest) GetPagination() *v1beta1.PageRequest {
+func (x *QueryCallbackCountersRequest) GetPagination() *v1beta1.PageRequest {
 	if x != nil {
 		return x.Pagination
 	}
 	return nil
 }
 
-// QueryCountersResponse is the response type for the Query/Counters RPC
+// QueryCallbackCountersResponse is the response type for the Query/Counters RPC
 // method.
-type QueryCountersResponse struct {
+type QueryCallbackCountersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// counters defines all the counters in the store.
-	Counters []*Counter `protobuf:"bytes,1,rep,name=counters,proto3" json:"counters,omitempty"`
+	// counters defines all the callback counters in the store.
+	Counters []*CallbackCounter `protobuf:"bytes,1,rep,name=counters,proto3" json:"counters,omitempty"`
 	// pagination defines the pagination in the response.
 	Pagination *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (x *QueryCountersResponse) Reset() {
-	*x = QueryCountersResponse{}
+func (x *QueryCallbackCountersResponse) Reset() {
+	*x = QueryCallbackCountersResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_cosmosregistry_example_v1_query_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2789,25 +2892,25 @@ func (x *QueryCountersResponse) Reset() {
 	}
 }
 
-func (x *QueryCountersResponse) String() string {
+func (x *QueryCallbackCountersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueryCountersResponse) ProtoMessage() {}
+func (*QueryCallbackCountersResponse) ProtoMessage() {}
 
-// Deprecated: Use QueryCountersResponse.ProtoReflect.Descriptor instead.
-func (*QueryCountersResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use QueryCallbackCountersResponse.ProtoReflect.Descriptor instead.
+func (*QueryCallbackCountersResponse) Descriptor() ([]byte, []int) {
 	return file_cosmosregistry_example_v1_query_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *QueryCountersResponse) GetCounters() []*Counter {
+func (x *QueryCallbackCountersResponse) GetCounters() []*CallbackCounter {
 	if x != nil {
 		return x.Counters
 	}
 	return nil
 }
 
-func (x *QueryCountersResponse) GetPagination() *v1beta1.PageResponse {
+func (x *QueryCallbackCountersResponse) GetPagination() *v1beta1.PageResponse {
 	if x != nil {
 		return x.Pagination
 	}
@@ -2896,87 +2999,96 @@ var file_cosmosregistry_example_v1_query_proto_rawDesc = []byte{
 	0x79, 0x2f, 0x76, 0x31, 0x2f, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x1a, 0x11, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2f, 0x61, 0x6d, 0x69, 0x6e, 0x6f, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x1a, 0x14, 0x67, 0x6f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67,
-	0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x19, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
-	0x73, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x22, 0x49, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75,
-	0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x32, 0x0a, 0x07, 0x61,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x18, 0xd2, 0xb4,
-	0x2d, 0x14, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22,
-	0x30, 0x0a, 0x14, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65,
-	0x72, 0x22, 0x5e, 0x0a, 0x14, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65,
-	0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67,
-	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72,
-	0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x22, 0xa0, 0x01, 0x0a, 0x15, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74,
-	0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x08, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65,
-	0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65,
-	0x72, 0x52, 0x08, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x47, 0x0a, 0x0a, 0x70,
-	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75,
-	0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x5b, 0x0a, 0x13, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x44, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x21, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74,
-	0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52,
-	0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x32, 0xe6, 0x03, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x12, 0xa5, 0x01, 0x0a, 0x07, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x12, 0x2e, 0x2e,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65,
-	0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2f, 0x2e,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65,
-	0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x39,
-	0x88, 0xe7, 0xb0, 0x2a, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2e, 0x12, 0x2c, 0x2f, 0x63, 0x6f,
-	0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61,
-	0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x2f,
-	0x7b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x7d, 0x12, 0x9f, 0x01, 0x0a, 0x08, 0x43, 0x6f,
-	0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x2f, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72,
-	0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e,
-	0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x30, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
-	0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
-	0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x30, 0x88, 0xe7, 0xb0, 0x2a, 0x01,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x25, 0x12, 0x23, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72,
-	0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f,
-	0x76, 0x31, 0x2f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x92, 0x01, 0x0a, 0x06,
-	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x2d, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72,
-	0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e,
-	0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65,
-	0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76,
-	0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x29, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x23, 0x12, 0x21, 0x2f,
-	0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65,
-	0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x42, 0xfc, 0x01, 0x0a, 0x1d, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72,
-	0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e,
-	0x76, 0x31, 0x42, 0x0a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
-	0x5a, 0x49, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73,
-	0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d,
-	0x70, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65,
-	0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x76,
-	0x31, 0x3b, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x43, 0x45,
-	0x58, 0xaa, 0x02, 0x19, 0x43, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74,
-	0x72, 0x79, 0x2e, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x19,
-	0x43, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x5c, 0x45,
-	0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x25, 0x43, 0x6f, 0x73, 0x6d,
-	0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x5c, 0x45, 0x78, 0x61, 0x6d, 0x70,
-	0x6c, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0xea, 0x02, 0x1b, 0x43, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74,
-	0x72, 0x79, 0x3a, 0x3a, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x67, 0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x55, 0x0a, 0x1b, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65,
+	0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x70, 0x6f, 0x72, 0x74,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6f, 0x72, 0x74, 0x49,
+	0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x49, 0x64,
+	0x22, 0x64, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63,
+	0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x44, 0x0a, 0x07, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x2a, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74,
+	0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x61,
+	0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x07, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x22, 0x66, 0x0a, 0x1c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43,
+	0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76,
+	0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xb0,
+	0x01, 0x0a, 0x1d, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x46, 0x0a, 0x08, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73,
+	0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x43,
+	0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x08,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x47, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x63,
+	0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79,
+	0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x5b, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x44,
+	0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21,
+	0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e,
+	0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x32, 0xb3, 0x04, 0x0a, 0x05, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0xd2,
+	0x01, 0x0a, 0x0f, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x65, 0x72, 0x12, 0x36, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73,
+	0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x37, 0x2e, 0x63, 0x6f, 0x73,
+	0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d,
+	0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c,
+	0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x4e, 0x88, 0xe7, 0xb0, 0x2a, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x43,
+	0x12, 0x41, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
+	0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x61, 0x6c,
+	0x6c, 0x62, 0x61, 0x63, 0x6b, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x2f, 0x7b, 0x70, 0x6f,
+	0x72, 0x74, 0x5f, 0x69, 0x64, 0x7d, 0x2f, 0x7b, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x5f,
+	0x69, 0x64, 0x7d, 0x12, 0xbf, 0x01, 0x0a, 0x10, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x37, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c,
+	0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61,
+	0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x38, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74,
+	0x72, 0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x38, 0x88, 0xe7, 0xb0,
+	0x2a, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2d, 0x12, 0x2b, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c,
+	0x65, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x65, 0x72, 0x73, 0x12, 0x92, 0x01, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x12, 0x2d, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
+	0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x2e, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79,
+	0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x29, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x23, 0x12, 0x21, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
+	0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
+	0x2f, 0x76, 0x31, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0xfc, 0x01, 0x0a, 0x1d, 0x63,
+	0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
+	0x79, 0x2e, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x0a, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x49, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67,
+	0x69, 0x73, 0x74, 0x72, 0x79, 0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79,
+	0x2f, 0x65, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x65, 0x78, 0x61, 0x6d,
+	0x70, 0x6c, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x43, 0x45, 0x58, 0xaa, 0x02, 0x19, 0x43, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x2e, 0x45, 0x78, 0x61,
+	0x6d, 0x70, 0x6c, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x19, 0x43, 0x6f, 0x73, 0x6d, 0x6f, 0x73,
+	0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x5c, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65,
+	0x5c, 0x56, 0x31, 0xe2, 0x02, 0x25, 0x43, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69,
+	0x73, 0x74, 0x72, 0x79, 0x5c, 0x45, 0x78, 0x61, 0x6d, 0x70, 0x6c, 0x65, 0x5c, 0x56, 0x31, 0x5c,
+	0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x1b, 0x43, 0x6f,
+	0x73, 0x6d, 0x6f, 0x73, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x3a, 0x3a, 0x45, 0x78,
+	0x61, 0x6d, 0x70, 0x6c, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -2993,33 +3105,34 @@ func file_cosmosregistry_example_v1_query_proto_rawDescGZIP() []byte {
 
 var file_cosmosregistry_example_v1_query_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_cosmosregistry_example_v1_query_proto_goTypes = []interface{}{
-	(*QueryCounterRequest)(nil),   // 0: cosmosregistry.example.v1.QueryCounterRequest
-	(*QueryCounterResponse)(nil),  // 1: cosmosregistry.example.v1.QueryCounterResponse
-	(*QueryCountersRequest)(nil),  // 2: cosmosregistry.example.v1.QueryCountersRequest
-	(*QueryCountersResponse)(nil), // 3: cosmosregistry.example.v1.QueryCountersResponse
-	(*QueryParamsRequest)(nil),    // 4: cosmosregistry.example.v1.QueryParamsRequest
-	(*QueryParamsResponse)(nil),   // 5: cosmosregistry.example.v1.QueryParamsResponse
-	(*v1beta1.PageRequest)(nil),   // 6: cosmos.base.query.v1beta1.PageRequest
-	(*Counter)(nil),               // 7: cosmosregistry.example.v1.Counter
-	(*v1beta1.PageResponse)(nil),  // 8: cosmos.base.query.v1beta1.PageResponse
-	(*Params)(nil),                // 9: cosmosregistry.example.v1.Params
+	(*QueryCallbackCounterRequest)(nil),   // 0: cosmosregistry.example.v1.QueryCallbackCounterRequest
+	(*QueryCallbackCounterResponse)(nil),  // 1: cosmosregistry.example.v1.QueryCallbackCounterResponse
+	(*QueryCallbackCountersRequest)(nil),  // 2: cosmosregistry.example.v1.QueryCallbackCountersRequest
+	(*QueryCallbackCountersResponse)(nil), // 3: cosmosregistry.example.v1.QueryCallbackCountersResponse
+	(*QueryParamsRequest)(nil),            // 4: cosmosregistry.example.v1.QueryParamsRequest
+	(*QueryParamsResponse)(nil),           // 5: cosmosregistry.example.v1.QueryParamsResponse
+	(*CallbackCounter)(nil),               // 6: cosmosregistry.example.v1.CallbackCounter
+	(*v1beta1.PageRequest)(nil),           // 7: cosmos.base.query.v1beta1.PageRequest
+	(*v1beta1.PageResponse)(nil),          // 8: cosmos.base.query.v1beta1.PageResponse
+	(*Params)(nil),                        // 9: cosmosregistry.example.v1.Params
 }
 var file_cosmosregistry_example_v1_query_proto_depIdxs = []int32{
-	6, // 0: cosmosregistry.example.v1.QueryCountersRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
-	7, // 1: cosmosregistry.example.v1.QueryCountersResponse.counters:type_name -> cosmosregistry.example.v1.Counter
-	8, // 2: cosmosregistry.example.v1.QueryCountersResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
-	9, // 3: cosmosregistry.example.v1.QueryParamsResponse.params:type_name -> cosmosregistry.example.v1.Params
-	0, // 4: cosmosregistry.example.v1.Query.Counter:input_type -> cosmosregistry.example.v1.QueryCounterRequest
-	2, // 5: cosmosregistry.example.v1.Query.Counters:input_type -> cosmosregistry.example.v1.QueryCountersRequest
-	4, // 6: cosmosregistry.example.v1.Query.Params:input_type -> cosmosregistry.example.v1.QueryParamsRequest
-	1, // 7: cosmosregistry.example.v1.Query.Counter:output_type -> cosmosregistry.example.v1.QueryCounterResponse
-	3, // 8: cosmosregistry.example.v1.Query.Counters:output_type -> cosmosregistry.example.v1.QueryCountersResponse
-	5, // 9: cosmosregistry.example.v1.Query.Params:output_type -> cosmosregistry.example.v1.QueryParamsResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	6, // 0: cosmosregistry.example.v1.QueryCallbackCounterResponse.counter:type_name -> cosmosregistry.example.v1.CallbackCounter
+	7, // 1: cosmosregistry.example.v1.QueryCallbackCountersRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	6, // 2: cosmosregistry.example.v1.QueryCallbackCountersResponse.counters:type_name -> cosmosregistry.example.v1.CallbackCounter
+	8, // 3: cosmosregistry.example.v1.QueryCallbackCountersResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	9, // 4: cosmosregistry.example.v1.QueryParamsResponse.params:type_name -> cosmosregistry.example.v1.Params
+	0, // 5: cosmosregistry.example.v1.Query.CallbackCounter:input_type -> cosmosregistry.example.v1.QueryCallbackCounterRequest
+	2, // 6: cosmosregistry.example.v1.Query.CallbackCounters:input_type -> cosmosregistry.example.v1.QueryCallbackCountersRequest
+	4, // 7: cosmosregistry.example.v1.Query.Params:input_type -> cosmosregistry.example.v1.QueryParamsRequest
+	1, // 8: cosmosregistry.example.v1.Query.CallbackCounter:output_type -> cosmosregistry.example.v1.QueryCallbackCounterResponse
+	3, // 9: cosmosregistry.example.v1.Query.CallbackCounters:output_type -> cosmosregistry.example.v1.QueryCallbackCountersResponse
+	5, // 10: cosmosregistry.example.v1.Query.Params:output_type -> cosmosregistry.example.v1.QueryParamsResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_cosmosregistry_example_v1_query_proto_init() }
@@ -3030,7 +3143,7 @@ func file_cosmosregistry_example_v1_query_proto_init() {
 	file_cosmosregistry_example_v1_types_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_cosmosregistry_example_v1_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryCounterRequest); i {
+			switch v := v.(*QueryCallbackCounterRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3042,7 +3155,7 @@ func file_cosmosregistry_example_v1_query_proto_init() {
 			}
 		}
 		file_cosmosregistry_example_v1_query_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryCounterResponse); i {
+			switch v := v.(*QueryCallbackCounterResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3054,7 +3167,7 @@ func file_cosmosregistry_example_v1_query_proto_init() {
 			}
 		}
 		file_cosmosregistry_example_v1_query_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryCountersRequest); i {
+			switch v := v.(*QueryCallbackCountersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3066,7 +3179,7 @@ func file_cosmosregistry_example_v1_query_proto_init() {
 			}
 		}
 		file_cosmosregistry_example_v1_query_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*QueryCountersResponse); i {
+			switch v := v.(*QueryCallbackCountersResponse); i {
 			case 0:
 				return &v.state
 			case 1:
