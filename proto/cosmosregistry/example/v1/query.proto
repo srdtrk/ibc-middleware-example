@@ -9,21 +9,20 @@ import "google/api/annotations.proto";
 import "cosmos/query/v1/query.proto";
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
-import "cosmos_proto/cosmos.proto";
 
 // Msg defines the module Msg service.
 service Query {
-  // Counter returns the current counter value.
-  rpc Counter(QueryCounterRequest) returns (QueryCounterResponse) {
+  // CallbackCounter returns the current callback counter value.
+  rpc CallbackCounter(QueryCallbackCounterRequest) returns (QueryCallbackCounterResponse) {
     option (cosmos.query.v1.module_query_safe) = true;
     option (google.api.http).get =
-        "/cosmosregistry/example/v1/counter/{address}";
+        "/cosmosregistry/example/v1/callbackcounter/{port_id}/{channel_id}";
   }
 
-  // Counters returns all the counter values.
-  rpc Counters(QueryCountersRequest) returns (QueryCountersResponse) {
+  // CallbackCounters returns all the counter values.
+  rpc CallbackCounters(QueryCallbackCountersRequest) returns (QueryCallbackCountersResponse) {
     option (cosmos.query.v1.module_query_safe) = true;
-    option (google.api.http).get = "/cosmosregistry/example/v1/counters";
+    option (google.api.http).get = "/cosmosregistry/example/v1/callbackcounters";
   }
 
   // Params returns the module parameters.
@@ -32,31 +31,33 @@ service Query {
   }
 }
 
-// QueryCounterRequest is the request type for the Query/Counter RPC
+// QueryCallbackCounterRequest is the request type for the Query/Counter RPC
 // method.
-message QueryCounterRequest {
-  // address defines the address to query for the counter.
-  string address = 1 [ (cosmos_proto.scalar) = "cosmos.AddressString" ];
+message QueryCallbackCounterRequest {
+  // port_id defines the port_id to query for the counter.
+  string port_id = 1;
+  // channel_id defines the channel_id to query for the counter.
+  string channel_id = 2;
 }
 
-// QueryCounterResponse is the response type for the Query/Counter RPC
+// QueryCallbackCounterResponse is the response type for the Query/Counter RPC
 // method.
-message QueryCounterResponse {
+message QueryCallbackCounterResponse {
   // counter defines the current counter for the sender.
-  uint64 counter = 1;
+  CallbackCounter counter = 1;
 }
 
-// QueryCountersResponse is the request type for the Query/Counters RPC
-message QueryCountersRequest {
+// QueryCallbackCountersRequest is the request type for the Query/Counters RPC
+message QueryCallbackCountersRequest {
   // pagination defines an optional pagination for the request.
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
-// QueryCountersResponse is the response type for the Query/Counters RPC
+// QueryCallbackCountersResponse is the response type for the Query/Counters RPC
 // method.
-message QueryCountersResponse {
-  // counters defines all the counters in the store.
-  repeated Counter counters = 1;
+message QueryCallbackCountersResponse {
+  // counters defines all the callback counters in the store.
+  repeated CallbackCounter counters = 1;
 
   // pagination defines the pagination in the response.
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
