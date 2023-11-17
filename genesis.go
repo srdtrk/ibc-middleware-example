@@ -11,11 +11,11 @@ func NewGenesisState() *GenesisState {
 func (gs *GenesisState) Validate() error {
 	uniq := make(map[string]bool)
 	for _, counter := range gs.Counters {
-		if _, ok := uniq[counter.Address]; ok {
-			return ErrDuplicateAddress
+		if _, ok := uniq[counter.ChannelId]; ok {
+			return ErrDuplicateChannelID
 		}
 
-		uniq[counter.Address] = true
+		uniq[counter.ChannelId] = true
 	}
 
 	if err := gs.Params.Validate(); err != nil {

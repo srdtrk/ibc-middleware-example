@@ -15,6 +15,11 @@ import (
 	"github.com/cosmosregistry/example/keeper"
 )
 
+const (
+	defaultTestPortID = "transfer"
+	defaultTestChanID = "channel-0"
+)
+
 type testFixture struct {
 	ctx         sdk.Context
 	k           keeper.Keeper

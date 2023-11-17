@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 
+	"cosmossdk.io/collections"
 	"github.com/cosmosregistry/example"
 )
 
@@ -13,7 +14,7 @@ func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) er
 	}
 
 	for _, counter := range data.Counters {
-		if err := k.Counter.Set(ctx, counter.Address, counter.Count); err != nil {
+		if err := k.CallbackCounter.Set(ctx, collections.Join(counter.ChannelId, "TODO"), counter); err != nil {
 			return err
 		}
 	}
@@ -28,15 +29,13 @@ func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, erro
 		return nil, err
 	}
 
-	var counters []example.Counter
-	if err := k.Counter.Walk(ctx, nil, func(address string, count uint64) (bool, error) {
-		counters = append(counters, example.Counter{
-			Address: address,
-			Count:   count,
-		})
+	iter, err := k.CallbackCounter.Iterate(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
 
-		return false, nil
-	}); err != nil {
+	counters, err := iter.Values()
+	if err != nil {
 		return nil, err
 	}
 
