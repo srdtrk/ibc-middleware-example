@@ -26,7 +26,7 @@ type queryServer struct {
 
 // CallbackCounter defines the handler for the Query/CallbackCounter RPC method.
 func (qs queryServer) CallbackCounter(ctx context.Context, req *example.QueryCallbackCounterRequest) (*example.QueryCallbackCounterResponse, error) {
-	counter, err := qs.k.CallbackCounter.Get(ctx, collections.Join(req.PortId, req.ChannelId))
+	counter, err := qs.k.CallbackCounter.Get(ctx, req.ChannelId)
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
@@ -40,7 +40,7 @@ func (qs queryServer) CallbackCounters(ctx context.Context, req *example.QueryCa
 		ctx,
 		qs.k.CallbackCounter,
 		req.Pagination,
-		func(key collections.Pair[string, string], value example.CallbackCounter) (*example.CallbackCounter, error) {
+		func(_ string, value example.CallbackCounter) (*example.CallbackCounter, error) {
 			return &value, nil
 		})
 	if err != nil {
