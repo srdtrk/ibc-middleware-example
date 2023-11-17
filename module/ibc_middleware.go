@@ -217,6 +217,27 @@ func (im IBCMiddleware) SendPacket(
 	timeoutTimestamp uint64,
 	data []byte,
 ) (uint64, error) {
+	middlewareEnabled, err := im.keeper.MiddlewareEnabled.Has(ctx, collections.Join(sourcePort, sourceChannel))
+	if err != nil {
+		middlewareEnabled = false
+	}
+
+	if middlewareEnabled {
+		counter, err := im.keeper.CallbackCounter.Get(ctx, sourceChannel)
+		if err != nil {
+			counter = example.NewCallbackCounter(sourceChannel)
+		}
+
+		counter.SendPacket++
+
+		if err = im.keeper.CallbackCounter.Set(ctx, sourceChannel, counter); err != nil {
+			return 0, err
+		}
+
+		// do custom logic here
+	}
+
+	// call underlying app's SendPacket callback.
 	return im.ics4Wrapper.SendPacket(ctx, chanCap, sourcePort, sourceChannel, timeoutHeight, timeoutTimestamp, data)
 }
 
@@ -226,6 +247,28 @@ func (im IBCMiddleware) OnRecvPacket(
 	packet channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) ibcexported.Acknowledgement {
+	// In OnRecvPacket, the destination port and channel are the (port, channel) of the receiving chain.
+	middlewareEnabled, err := im.keeper.MiddlewareEnabled.Has(ctx, collections.Join(packet.DestinationPort, packet.DestinationChannel))
+	if err != nil {
+		middlewareEnabled = false
+	}
+
+	if middlewareEnabled {
+		counter, err := im.keeper.CallbackCounter.Get(ctx, packet.DestinationChannel)
+		if err != nil {
+			counter = example.NewCallbackCounter(packet.DestinationChannel)
+		}
+
+		counter.OnRecvPacket++
+
+		if err = im.keeper.CallbackCounter.Set(ctx, packet.DestinationChannel, counter); err != nil {
+			panic(err)
+		}
+
+		// do custom logic here
+		// you may also wrap the acknowledgement in a custom acknowledgement type to add additional data to the acknowledgement
+	}
+
 	// call underlying app's OnRecvPacket callback.
 	return im.app.OnRecvPacket(ctx, packet, relayer)
 }
@@ -237,6 +280,26 @@ func (im IBCMiddleware) OnAcknowledgementPacket(
 	acknowledgement []byte,
 	relayer sdk.AccAddress,
 ) error {
+	middlewareEnabled, err := im.keeper.MiddlewareEnabled.Has(ctx, collections.Join(packet.SourcePort, packet.SourceChannel))
+	if err != nil {
+		middlewareEnabled = false
+	}
+
+	if middlewareEnabled {
+		counter, err := im.keeper.CallbackCounter.Get(ctx, packet.SourceChannel)
+		if err != nil {
+			counter = example.NewCallbackCounter(packet.SourceChannel)
+		}
+
+		counter.OnAcknowledgementPacket++
+
+		if err = im.keeper.CallbackCounter.Set(ctx, packet.SourceChannel, counter); err != nil {
+			return err
+		}
+
+		// do custom logic here
+	}
+
 	// call underlying app's OnAcknowledgementPacket callback.
 	return im.app.OnAcknowledgementPacket(ctx, packet, acknowledgement, relayer)
 }
@@ -248,6 +311,26 @@ func (im IBCMiddleware) OnTimeoutPacket(
 	packet channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) error {
+	middlewareEnabled, err := im.keeper.MiddlewareEnabled.Has(ctx, collections.Join(packet.SourcePort, packet.SourceChannel))
+	if err != nil {
+		middlewareEnabled = false
+	}
+
+	if middlewareEnabled {
+		counter, err := im.keeper.CallbackCounter.Get(ctx, packet.SourceChannel)
+		if err != nil {
+			counter = example.NewCallbackCounter(packet.SourceChannel)
+		}
+
+		counter.OnTimeoutPacket++
+
+		if err = im.keeper.CallbackCounter.Set(ctx, packet.SourceChannel, counter); err != nil {
+			return err
+		}
+
+		// do custom logic here
+	}
+
 	// call underlying app's OnTimeoutPacket callback.
 	return im.app.OnTimeoutPacket(ctx, packet, relayer)
 }
