@@ -2,6 +2,7 @@ package example
 
 import (
 	"encoding/json"
+	"strings"
 
 	errorsmod "cosmossdk.io/errors"
 )
@@ -23,5 +24,23 @@ func MetadataFromVersion(version string) (Metadata, error) {
 		return Metadata{}, errorsmod.Wrapf(ErrInvalidChannelVersion, "failed to unmarshal metadata from version: %s", version)
 	}
 
+	err = validateMetadata(metadata)
+	if err != nil {
+		return Metadata{}, err
+	}
+
 	return metadata, nil
+}
+
+// validateMetadata validates the given metadata
+func validateMetadata(metadata Metadata) error {
+	if strings.TrimSpace(metadata.AppVersion) == "" {
+		return errorsmod.Wrapf(ErrInvalidChannelVersion, "metadata app_version cannot be empty")
+	}
+
+	if strings.TrimSpace(metadata.ExampleVersion) == "" {
+		return errorsmod.Wrapf(ErrInvalidChannelVersion, "metadata example_version cannot be empty")
+	}
+
+	return nil
 }
