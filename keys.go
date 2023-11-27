@@ -5,6 +5,8 @@ import "cosmossdk.io/collections"
 const (
 	ModuleName = "example"
 
+	StoreKey = ModuleName
+
 	Version = "example-1"
 )
 

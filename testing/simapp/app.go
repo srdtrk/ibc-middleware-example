@@ -131,6 +131,10 @@ import (
 	ibctm "github.com/cosmos/ibc-go/v8/modules/light-clients/07-tendermint"
 	ibcmock "github.com/cosmos/ibc-go/v8/testing/mock"
 	ibctestingtypes "github.com/cosmos/ibc-go/v8/testing/types"
+
+	"github.com/cosmosregistry/example"
+	examplekeeper "github.com/cosmosregistry/example/keeper"
+	examplemod "github.com/cosmosregistry/example/module"
 )
 
 const appName = "SimApp"
@@ -156,6 +160,7 @@ var (
 		ibcfeetypes.ModuleName:         nil,
 		icatypes.ModuleName:            nil,
 		ibcmock.ModuleName:             nil,
+		example.ModuleName:             nil,
 	}
 )
 
@@ -196,6 +201,7 @@ type SimApp struct {
 	IBCFeeKeeper          ibcfeekeeper.Keeper
 	ICAControllerKeeper   icacontrollerkeeper.Keeper
 	ICAHostKeeper         icahostkeeper.Keeper
+	MiddlewareKeeper      examplekeeper.Keeper
 	EvidenceKeeper        evidencekeeper.Keeper
 	TransferKeeper        ibctransferkeeper.Keeper
 	FeeGrantKeeper        feegrantkeeper.Keeper
@@ -301,7 +307,7 @@ func NewSimApp(
 		minttypes.StoreKey, distrtypes.StoreKey, slashingtypes.StoreKey,
 		govtypes.StoreKey, group.StoreKey, paramstypes.StoreKey, ibcexported.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, icacontrollertypes.StoreKey, icahosttypes.StoreKey, capabilitytypes.StoreKey,
-		authzkeeper.StoreKey, ibcfeetypes.StoreKey, consensusparamtypes.StoreKey, circuittypes.StoreKey,
+		authzkeeper.StoreKey, ibcfeetypes.StoreKey, consensusparamtypes.StoreKey, circuittypes.StoreKey, example.StoreKey,
 	)
 
 	// register streaming services
@@ -443,6 +449,13 @@ func NewSimApp(
 		app.IBCKeeper.PortKeeper, app.AccountKeeper, app.BankKeeper,
 	)
 
+	// Example Middleware Keeper
+	app.MiddlewareKeeper = examplekeeper.NewKeeper(
+		appCodec, authcodec.NewBech32Codec(sdk.GetConfig().GetBech32AccountAddrPrefix()),
+		runtime.NewKVStoreService(keys[example.StoreKey]),
+		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+	)
+
 	// ICA Controller keeper
 	app.ICAControllerKeeper = icacontrollerkeeper.NewKeeper(
 		appCodec, keys[icacontrollertypes.StoreKey], app.GetSubspace(icacontrollertypes.SubModuleName),
@@ -489,12 +502,13 @@ func NewSimApp(
 
 	// Create Transfer Stack
 	// SendPacket, since it is originating from the application to core IBC:
-	// transferKeeper.SendPacket -> fee.SendPacket -> channel.SendPacket
+	// transferKeeper.SendPacket -> fee.SendPacket -> example.SendPacket -> channel.SendPacket
 
 	// RecvPacket, message that originates from core IBC and goes down to app, the flow is the other way
-	// channel.RecvPacket -> fee.OnRecvPacket -> transfer.OnRecvPacket
+	// channel.RecvPacket -> example.OnRecvPacket -> fee.OnRecvPacket -> transfer.OnRecvPacket
 
 	// transfer stack contains (from top to bottom):
+	// - Example Middleware
 	// - IBC Fee Middleware
 	// - Transfer
 
@@ -502,6 +516,9 @@ func NewSimApp(
 	var transferStack porttypes.IBCModule
 	transferStack = transfer.NewIBCModule(app.TransferKeeper)
 	transferStack = ibcfee.NewIBCMiddleware(transferStack, app.IBCFeeKeeper)
+	transferStack = examplemod.NewIBCMiddleware(transferStack, app.IBCKeeper.ChannelKeeper, app.MiddlewareKeeper)
+	// Since the example middleware itself is an ics4wrapper, it needs to be passed to the transfer keeper
+	app.IBCFeeKeeper.WithICS4Wrapper(transferStack.(porttypes.ICS4Wrapper))
 
 	// Add transfer stack to IBC Router
 	ibcRouter.AddRoute(ibctransfertypes.ModuleName, transferStack)
@@ -598,6 +615,9 @@ func NewSimApp(
 		ibctm.NewAppModule(),
 		solomachine.NewAppModule(),
 		mockModule,
+
+		// Example Middleware Module
+		examplemod.NewAppModule(appCodec, app.MiddlewareKeeper),
 	)
 
 	// BasicModuleManager defines the module BasicManager is in charge of setting up basic,
@@ -635,12 +655,13 @@ func NewSimApp(
 		evidencetypes.ModuleName,
 		stakingtypes.ModuleName,
 		ibcexported.ModuleName,
-		ibctransfertypes.ModuleName,
+		example.ModuleName,
 		genutiltypes.ModuleName,
 		authz.ModuleName,
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		ibcmock.ModuleName,
+		ibctransfertypes.ModuleName,
 	)
 	app.ModuleManager.SetOrderEndBlockers(
 		crisistypes.ModuleName,
@@ -654,6 +675,7 @@ func NewSimApp(
 		icatypes.ModuleName,
 		ibcfeetypes.ModuleName,
 		ibcmock.ModuleName,
+		ibctransfertypes.ModuleName,
 		group.ModuleName,
 	)
 
@@ -669,8 +691,8 @@ func NewSimApp(
 		banktypes.ModuleName, distrtypes.ModuleName, stakingtypes.ModuleName,
 		slashingtypes.ModuleName, govtypes.ModuleName, minttypes.ModuleName, crisistypes.ModuleName,
 		ibcexported.ModuleName, genutiltypes.ModuleName, evidencetypes.ModuleName, authz.ModuleName, ibctransfertypes.ModuleName,
-		icatypes.ModuleName, ibcfeetypes.ModuleName, ibcmock.ModuleName, feegrant.ModuleName, paramstypes.ModuleName, upgradetypes.ModuleName,
-		vestingtypes.ModuleName, group.ModuleName, consensusparamtypes.ModuleName, circuittypes.ModuleName,
+		icatypes.ModuleName, ibcfeetypes.ModuleName, ibcmock.ModuleName, example.ModuleName, feegrant.ModuleName, paramstypes.ModuleName,
+		upgradetypes.ModuleName, vestingtypes.ModuleName, group.ModuleName, consensusparamtypes.ModuleName, circuittypes.ModuleName,
 	}
 	app.ModuleManager.SetOrderInitGenesis(genesisModuleOrder...)
 	app.ModuleManager.SetOrderExportGenesis(genesisModuleOrder...)
