@@ -60,9 +60,7 @@ func TestInitGenesis(t *testing.T) {
 			f = initFixture(t)
 
 			data = &example.GenesisState{
-				Counters:                  []example.CallbackCounter{},
-				MiddlewareEnabledChannels: []example.MiddlewareEnabledChannel{},
-				Params:                    example.DefaultParams(),
+				Params: example.DefaultParams(),
 			}
 
 			tc.malleate()
@@ -112,17 +110,75 @@ func TestInitGenesis(t *testing.T) {
 	}
 }
 
-// func TestExportGenesis(t *testing.T) {
-// 	fixture := initFixture(t)
-//
-// 	_, err := fixture.msgServer.IncrementCounter(fixture.ctx, &example.MsgIncrementCounter{
-// 		Sender: fixture.addrs[0].String(),
-// 	})
-// 	require.NoError(t, err)
-//
-// 	out, err := fixture.k.ExportGenesis(fixture.ctx)
-// 	require.NoError(t, err)
-//
-// 	require.Equal(t, example.DefaultParams(), out.Params)
-// 	require.Equal(t, uint64(1), out.Counters[0].Count)
-// }
+func TestExportGenesis(t *testing.T) {
+	var (
+		f *testFixture
+
+		expGenesisState *example.GenesisState
+	)
+
+	testCases := []struct {
+		name     string
+		malleate func()
+		expErr   bool
+	}{
+		{
+			"success: no genesis state",
+			func() {
+				expGenesisState = &example.GenesisState{
+					Params: example.DefaultParams(),
+				}
+			},
+			false,
+		},
+		{
+			"success: some genesis state",
+			func() {
+				expGenesisState = &example.GenesisState{
+					Params:                    example.DefaultParams(),
+					Counters:                  []example.CallbackCounter{},
+					MiddlewareEnabledChannels: []example.MiddlewareEnabledChannel{},
+				}
+
+				for i := 0; i < 10; i++ {
+					cc := example.CallbackCounter{
+						OnRecvPacket:            1,
+						OnAcknowledgementPacket: 1,
+						OnTimeoutPacket:         1,
+						SendPacket:              1,
+						ChannelId:               fmt.Sprintf("channel-%d", i),
+					}
+					expGenesisState.Counters = append(expGenesisState.Counters, cc)
+					err := f.k.CallbackCounter.Set(f.ctx, cc.ChannelId, cc)
+					require.NoError(t, err)
+
+					expGenesisState.MiddlewareEnabledChannels = append(expGenesisState.MiddlewareEnabledChannels, example.MiddlewareEnabledChannel{
+						PortId:    fmt.Sprintf("port-%d", i),
+						ChannelId: fmt.Sprintf("channel-%d", i),
+					})
+					err = f.k.MiddlewareEnabled.Set(f.ctx, collections.Join(fmt.Sprintf("port-%d", i), fmt.Sprintf("channel-%d", i)))
+					require.NoError(t, err)
+				}
+			},
+			false,
+		},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			f = initFixture(t)
+
+			tc.malleate()
+
+			out, err := f.k.ExportGenesis(f.ctx)
+
+			if tc.expErr {
+				require.Error(t, err)
+			} else {
+				require.NoError(t, err)
+				require.Equal(t, expGenesisState, out)
+			}
+		})
+	}
+}
