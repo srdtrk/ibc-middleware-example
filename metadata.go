@@ -19,13 +19,11 @@ func NewMetadata(exampleVersion, appVersion string) Metadata {
 // an error is returned if it fails to do so.
 func MetadataFromVersion(version string) (Metadata, error) {
 	var metadata Metadata
-	err := json.Unmarshal([]byte(version), &metadata)
-	if err != nil {
+	if err := json.Unmarshal([]byte(version), &metadata); err != nil {
 		return Metadata{}, errorsmod.Wrapf(ErrInvalidChannelVersion, "failed to unmarshal metadata from version: %s", version)
 	}
 
-	err = validateMetadata(metadata)
-	if err != nil {
+	if err := validateMetadata(metadata); err != nil {
 		return Metadata{}, err
 	}
 
