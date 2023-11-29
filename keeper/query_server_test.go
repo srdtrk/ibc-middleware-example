@@ -280,3 +280,88 @@ func TestQueryMiddlewareEnabledChannel(t *testing.T) {
 		})
 	}
 }
+
+func TestQueryMiddlewareEnabledChannels(t *testing.T) {
+	var (
+		f *testFixture
+
+		pagination *query.PageRequest
+
+		expChannels []*example.MiddlewareEnabledChannel
+	)
+
+	testCases := []struct {
+		name     string
+		malleate func()
+		expErr   bool
+	}{
+		{
+			"success: no channels enabled",
+			func() {
+			},
+			false,
+		},
+		{
+			"success: many channels enabled",
+			func() {
+				expChannels = []*example.MiddlewareEnabledChannel{}
+
+				for i := 0; i < 10; i++ {
+					channel := &example.MiddlewareEnabledChannel{
+						PortId:    fmt.Sprintf("port-%d", i),
+						ChannelId: fmt.Sprintf("channel-%d", i),
+					}
+
+					expChannels = append(expChannels, channel)
+
+					err := f.k.MiddlewareEnabled.Set(f.ctx, collections.Join(channel.PortId, channel.ChannelId))
+					require.NoError(t, err)
+				}
+			},
+			false,
+		},
+		{
+			"success: with pagination",
+			func() {
+				pagination = &query.PageRequest{Limit: 5}
+
+				expChannels = []*example.MiddlewareEnabledChannel{}
+
+				for i := 0; i < 10; i++ {
+					channel := &example.MiddlewareEnabledChannel{
+						PortId:    fmt.Sprintf("port-%d", i),
+						ChannelId: fmt.Sprintf("channel-%d", i),
+					}
+
+					if i < 5 {
+						expChannels = append(expChannels, channel)
+					}
+
+					err := f.k.MiddlewareEnabled.Set(f.ctx, collections.Join(channel.PortId, channel.ChannelId))
+					require.NoError(t, err)
+				}
+			},
+			false,
+		},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			f = initFixture(t)
+
+			expChannels = nil
+			tc.malleate()
+
+			resp, err := f.queryServer.MiddlewareEnabledChannels(f.ctx, &example.QueryMiddlewareEnabledChannelsRequest{Pagination: pagination})
+
+			if tc.expErr {
+				require.Error(t, err)
+				require.Nil(t, resp)
+			} else {
+				require.NoError(t, err)
+				require.Equal(t, expChannels, resp.MiddlewareEnabledChannels)
+			}
+		})
+	}
+}
