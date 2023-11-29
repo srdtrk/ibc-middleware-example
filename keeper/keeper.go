@@ -26,7 +26,7 @@ type Keeper struct {
 	// for a given portID and channelID.
 	MiddlewareEnabled collections.KeySet[collections.Pair[string, string]]
 	// CallbackCounter is a map from channelID to a counter that is incremented every time an expected
-	// channel or packet lifecycle callback is called.
+	// packet lifecycle callback is called.
 	CallbackCounter collections.Map[string, example.CallbackCounter]
 }
 
