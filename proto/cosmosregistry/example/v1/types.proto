@@ -47,7 +47,8 @@ message CallbackCounter {
   string channel_id = 5;
 }
 
-// MiddlewareEnabledChannel defines a channel that is enabled with this middleware.
+// MiddlewareEnabledChannel defines a channel that is enabled with this
+// middleware.
 message MiddlewareEnabledChannel {
   option (amino.name) = "cosmosregistry/example/MiddlewareEnabledChannel";
 

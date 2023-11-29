@@ -31,8 +31,216 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// QueryCallbackCounterRequest is the request type for the Query/Counter RPC
-// method.
+// QueryMiddlewareEnabledChannelRequest is the request type for the
+// Query/MiddlewareEnabledChannel RPC method.
+type QueryMiddlewareEnabledChannelRequest struct {
+	// port_id defines the port_id to query for the counter.
+	PortId string `protobuf:"bytes,1,opt,name=port_id,json=portId,proto3" json:"port_id,omitempty"`
+	// channel_id defines the channel_id to query for the counter.
+	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+}
+
+func (m *QueryMiddlewareEnabledChannelRequest) Reset()         { *m = QueryMiddlewareEnabledChannelRequest{} }
+func (m *QueryMiddlewareEnabledChannelRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryMiddlewareEnabledChannelRequest) ProtoMessage()    {}
+func (*QueryMiddlewareEnabledChannelRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_63eea967130d0f16, []int{0}
+}
+func (m *QueryMiddlewareEnabledChannelRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryMiddlewareEnabledChannelRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryMiddlewareEnabledChannelRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryMiddlewareEnabledChannelRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelRequest.Merge(m, src)
+}
+func (m *QueryMiddlewareEnabledChannelRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryMiddlewareEnabledChannelRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryMiddlewareEnabledChannelRequest proto.InternalMessageInfo
+
+func (m *QueryMiddlewareEnabledChannelRequest) GetPortId() string {
+	if m != nil {
+		return m.PortId
+	}
+	return ""
+}
+
+func (m *QueryMiddlewareEnabledChannelRequest) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+// QueryMiddlewareEnabledChannelResponse is the response type for the
+// Query/MiddlewareEnabledChannel RPC method.
+type QueryMiddlewareEnabledChannelResponse struct {
+	// middleware_enabled defines the middleware enabled status for the channel.
+	MiddlewareEnabled bool `protobuf:"varint,1,opt,name=middleware_enabled,json=middlewareEnabled,proto3" json:"middleware_enabled,omitempty"`
+}
+
+func (m *QueryMiddlewareEnabledChannelResponse) Reset()         { *m = QueryMiddlewareEnabledChannelResponse{} }
+func (m *QueryMiddlewareEnabledChannelResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryMiddlewareEnabledChannelResponse) ProtoMessage()    {}
+func (*QueryMiddlewareEnabledChannelResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_63eea967130d0f16, []int{1}
+}
+func (m *QueryMiddlewareEnabledChannelResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryMiddlewareEnabledChannelResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryMiddlewareEnabledChannelResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryMiddlewareEnabledChannelResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelResponse.Merge(m, src)
+}
+func (m *QueryMiddlewareEnabledChannelResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryMiddlewareEnabledChannelResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryMiddlewareEnabledChannelResponse proto.InternalMessageInfo
+
+func (m *QueryMiddlewareEnabledChannelResponse) GetMiddlewareEnabled() bool {
+	if m != nil {
+		return m.MiddlewareEnabled
+	}
+	return false
+}
+
+// QueryMiddlewareEnabledChannelsRequest is the request type for the
+// Query/MiddlewareEnabledChannels RPC method.
+type QueryMiddlewareEnabledChannelsRequest struct {
+	// pagination defines an optional pagination for the request.
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryMiddlewareEnabledChannelsRequest) Reset()         { *m = QueryMiddlewareEnabledChannelsRequest{} }
+func (m *QueryMiddlewareEnabledChannelsRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryMiddlewareEnabledChannelsRequest) ProtoMessage()    {}
+func (*QueryMiddlewareEnabledChannelsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_63eea967130d0f16, []int{2}
+}
+func (m *QueryMiddlewareEnabledChannelsRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryMiddlewareEnabledChannelsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryMiddlewareEnabledChannelsRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryMiddlewareEnabledChannelsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelsRequest.Merge(m, src)
+}
+func (m *QueryMiddlewareEnabledChannelsRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryMiddlewareEnabledChannelsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryMiddlewareEnabledChannelsRequest proto.InternalMessageInfo
+
+func (m *QueryMiddlewareEnabledChannelsRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+// QueryMiddlewareEnabledChannelsResponse is the response type for the
+// Query/MiddlewareEnabledChannels RPC method.
+type QueryMiddlewareEnabledChannelsResponse struct {
+	// channels defines all the middleware enabled channels in the store.
+	MiddlewareEnabledChannels []*MiddlewareEnabledChannel `protobuf:"bytes,1,rep,name=middleware_enabled_channels,json=middlewareEnabledChannels,proto3" json:"middleware_enabled_channels,omitempty"`
+	// pagination defines the pagination in the response.
+	Pagination *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryMiddlewareEnabledChannelsResponse) Reset() {
+	*m = QueryMiddlewareEnabledChannelsResponse{}
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryMiddlewareEnabledChannelsResponse) ProtoMessage()    {}
+func (*QueryMiddlewareEnabledChannelsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_63eea967130d0f16, []int{3}
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryMiddlewareEnabledChannelsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelsResponse.Merge(m, src)
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryMiddlewareEnabledChannelsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryMiddlewareEnabledChannelsResponse proto.InternalMessageInfo
+
+func (m *QueryMiddlewareEnabledChannelsResponse) GetMiddlewareEnabledChannels() []*MiddlewareEnabledChannel {
+	if m != nil {
+		return m.MiddlewareEnabledChannels
+	}
+	return nil
+}
+
+func (m *QueryMiddlewareEnabledChannelsResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+// QueryCallbackCounterRequest is the request type for the Query/CallbackCounter
+// RPC method.
 type QueryCallbackCounterRequest struct {
 	// port_id defines the port_id to query for the counter.
 	PortId string `protobuf:"bytes,1,opt,name=port_id,json=portId,proto3" json:"port_id,omitempty"`
@@ -44,7 +252,7 @@ func (m *QueryCallbackCounterRequest) Reset()         { *m = QueryCallbackCounte
 func (m *QueryCallbackCounterRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryCallbackCounterRequest) ProtoMessage()    {}
 func (*QueryCallbackCounterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_63eea967130d0f16, []int{0}
+	return fileDescriptor_63eea967130d0f16, []int{4}
 }
 func (m *QueryCallbackCounterRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -87,8 +295,8 @@ func (m *QueryCallbackCounterRequest) GetChannelId() string {
 	return ""
 }
 
-// QueryCallbackCounterResponse is the response type for the Query/Counter RPC
-// method.
+// QueryCallbackCounterResponse is the response type for the
+// Query/CallbackCounter RPC method.
 type QueryCallbackCounterResponse struct {
 	// counter defines the current counter for the sender.
 	Counter *CallbackCounter `protobuf:"bytes,1,opt,name=counter,proto3" json:"counter,omitempty"`
@@ -98,7 +306,7 @@ func (m *QueryCallbackCounterResponse) Reset()         { *m = QueryCallbackCount
 func (m *QueryCallbackCounterResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryCallbackCounterResponse) ProtoMessage()    {}
 func (*QueryCallbackCounterResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_63eea967130d0f16, []int{1}
+	return fileDescriptor_63eea967130d0f16, []int{5}
 }
 func (m *QueryCallbackCounterResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -134,7 +342,8 @@ func (m *QueryCallbackCounterResponse) GetCounter() *CallbackCounter {
 	return nil
 }
 
-// QueryCallbackCountersRequest is the request type for the Query/Counters RPC
+// QueryCallbackCountersRequest is the request type for the
+// Query/CallbackCounters RPC
 type QueryCallbackCountersRequest struct {
 	// pagination defines an optional pagination for the request.
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
@@ -144,7 +353,7 @@ func (m *QueryCallbackCountersRequest) Reset()         { *m = QueryCallbackCount
 func (m *QueryCallbackCountersRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryCallbackCountersRequest) ProtoMessage()    {}
 func (*QueryCallbackCountersRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_63eea967130d0f16, []int{2}
+	return fileDescriptor_63eea967130d0f16, []int{6}
 }
 func (m *QueryCallbackCountersRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -193,7 +402,7 @@ func (m *QueryCallbackCountersResponse) Reset()         { *m = QueryCallbackCoun
 func (m *QueryCallbackCountersResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryCallbackCountersResponse) ProtoMessage()    {}
 func (*QueryCallbackCountersResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_63eea967130d0f16, []int{3}
+	return fileDescriptor_63eea967130d0f16, []int{7}
 }
 func (m *QueryCallbackCountersResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -244,7 +453,7 @@ func (m *QueryParamsRequest) Reset()         { *m = QueryParamsRequest{} }
 func (m *QueryParamsRequest) String() string { return proto.CompactTextString(m) }
 func (*QueryParamsRequest) ProtoMessage()    {}
 func (*QueryParamsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_63eea967130d0f16, []int{4}
+	return fileDescriptor_63eea967130d0f16, []int{8}
 }
 func (m *QueryParamsRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -283,7 +492,7 @@ func (m *QueryParamsResponse) Reset()         { *m = QueryParamsResponse{} }
 func (m *QueryParamsResponse) String() string { return proto.CompactTextString(m) }
 func (*QueryParamsResponse) ProtoMessage()    {}
 func (*QueryParamsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_63eea967130d0f16, []int{5}
+	return fileDescriptor_63eea967130d0f16, []int{9}
 }
 func (m *QueryParamsResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -320,6 +529,10 @@ func (m *QueryParamsResponse) GetParams() Params {
 }
 
 func init() {
+	proto.RegisterType((*QueryMiddlewareEnabledChannelRequest)(nil), "cosmosregistry.example.v1.QueryMiddlewareEnabledChannelRequest")
+	proto.RegisterType((*QueryMiddlewareEnabledChannelResponse)(nil), "cosmosregistry.example.v1.QueryMiddlewareEnabledChannelResponse")
+	proto.RegisterType((*QueryMiddlewareEnabledChannelsRequest)(nil), "cosmosregistry.example.v1.QueryMiddlewareEnabledChannelsRequest")
+	proto.RegisterType((*QueryMiddlewareEnabledChannelsResponse)(nil), "cosmosregistry.example.v1.QueryMiddlewareEnabledChannelsResponse")
 	proto.RegisterType((*QueryCallbackCounterRequest)(nil), "cosmosregistry.example.v1.QueryCallbackCounterRequest")
 	proto.RegisterType((*QueryCallbackCounterResponse)(nil), "cosmosregistry.example.v1.QueryCallbackCounterResponse")
 	proto.RegisterType((*QueryCallbackCountersRequest)(nil), "cosmosregistry.example.v1.QueryCallbackCountersRequest")
@@ -333,42 +546,52 @@ func init() {
 }
 
 var fileDescriptor_63eea967130d0f16 = []byte{
-	// 557 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4f, 0x6b, 0x13, 0x41,
-	0x14, 0xcf, 0x44, 0x4d, 0xcd, 0x78, 0x50, 0xc7, 0x82, 0x75, 0xdb, 0xae, 0xcd, 0x8a, 0xff, 0x22,
-	0x9d, 0x21, 0x15, 0xb4, 0xe0, 0xc9, 0x46, 0x2a, 0xbd, 0x48, 0x0d, 0x78, 0xd1, 0x83, 0x4c, 0x36,
-	0xe3, 0x76, 0x71, 0x77, 0x67, 0xbb, 0x33, 0x09, 0x86, 0xd2, 0x8b, 0x27, 0x8f, 0xa2, 0x5f, 0xc2,
-	0x63, 0xc1, 0x0f, 0xe0, 0xb5, 0xc7, 0xa2, 0x17, 0x4f, 0x22, 0x89, 0xe0, 0xd7, 0x28, 0x3b, 0x33,
-	0xdb, 0x74, 0x43, 0xb3, 0x6d, 0x2e, 0x61, 0xf2, 0xde, 0xfb, 0xfd, 0x79, 0x7f, 0x12, 0x78, 0xdb,
-	0xe5, 0x22, 0xe4, 0x22, 0x61, 0x9e, 0x2f, 0x64, 0xd2, 0x27, 0xec, 0x03, 0x0d, 0xe3, 0x80, 0x91,
-	0x5e, 0x83, 0x6c, 0x77, 0x59, 0xd2, 0xc7, 0x71, 0xc2, 0x25, 0x47, 0x37, 0xf2, 0x65, 0xd8, 0x94,
-	0xe1, 0x5e, 0xc3, 0xaa, 0xeb, 0x14, 0x69, 0x53, 0xc1, 0x34, 0x86, 0xf4, 0x1a, 0x6d, 0x26, 0x69,
-	0x83, 0xc4, 0xd4, 0xf3, 0x23, 0x2a, 0x7d, 0x1e, 0x69, 0x1a, 0xab, 0x40, 0x4d, 0xf6, 0x63, 0x26,
-	0x4c, 0xd9, 0x82, 0xc7, 0xb9, 0x17, 0x30, 0x42, 0x63, 0x9f, 0xd0, 0x28, 0xe2, 0x52, 0x71, 0x64,
-	0xd9, 0x79, 0x23, 0x98, 0x69, 0x1d, 0x37, 0x6a, 0x5d, 0xa5, 0xa1, 0x1f, 0x71, 0xa2, 0x3e, 0x4d,
-	0x68, 0xd6, 0xe3, 0x1e, 0x57, 0x4f, 0x92, 0xbe, 0x74, 0xd4, 0x79, 0x05, 0xe7, 0x5f, 0xa6, 0xb8,
-	0x26, 0x0d, 0x82, 0x36, 0x75, 0xdf, 0x37, 0x79, 0x37, 0x92, 0x2c, 0x69, 0xb1, 0xed, 0x2e, 0x13,
-	0x12, 0x5d, 0x87, 0x33, 0x31, 0x4f, 0xe4, 0x5b, 0xbf, 0x33, 0x07, 0x96, 0xc0, 0xbd, 0x6a, 0xab,
-	0x92, 0x7e, 0xdd, 0xe8, 0xa0, 0x45, 0x08, 0xdd, 0x2d, 0x1a, 0x45, 0x2c, 0x48, 0x73, 0x65, 0x95,
-	0xab, 0x9a, 0xc8, 0x46, 0xc7, 0xe9, 0xc0, 0x85, 0x93, 0x69, 0x45, 0xcc, 0x23, 0xc1, 0xd0, 0x33,
-	0x38, 0xe3, 0xea, 0x90, 0xe2, 0xbd, 0xb4, 0x52, 0xc7, 0x13, 0x47, 0x8b, 0xc7, 0x49, 0x32, 0xa8,
-	0xf3, 0xee, 0x64, 0x15, 0x91, 0xb9, 0x5f, 0x87, 0x70, 0x34, 0x7b, 0x23, 0x74, 0xc7, 0x08, 0xe1,
-	0x74, 0x51, 0x58, 0xcf, 0xcc, 0x2c, 0x0a, 0x6f, 0x52, 0x8f, 0x19, 0x6c, 0xeb, 0x18, 0xd2, 0xd9,
-	0x03, 0x70, 0x71, 0x82, 0x90, 0xe9, 0x67, 0x1d, 0x5e, 0x34, 0xa6, 0xc4, 0x1c, 0x58, 0x3a, 0x37,
-	0x65, 0x43, 0x47, 0x58, 0xf4, 0x3c, 0xe7, 0xb8, 0xac, 0x1c, 0xdf, 0x3d, 0xd5, 0xb1, 0x36, 0x91,
-	0xb3, 0x3c, 0x0b, 0x91, 0x72, 0xbc, 0x49, 0x13, 0x1a, 0x66, 0x03, 0x71, 0xde, 0xc0, 0x6b, 0xb9,
-	0xe8, 0xd1, 0x36, 0x2a, 0xb1, 0x8a, 0x98, 0x19, 0xd5, 0x0a, 0xbc, 0x6b, 0xe8, 0x5a, 0x75, 0xff,
-	0xcf, 0xcd, 0xd2, 0xb7, 0xff, 0x7b, 0x75, 0xd0, 0x32, 0xd8, 0x95, 0xef, 0xe7, 0xe1, 0x05, 0xc5,
-	0x8e, 0x7e, 0x02, 0x78, 0x79, 0xac, 0x47, 0xf4, 0xa8, 0x80, 0xb3, 0xe0, 0x02, 0xad, 0xc7, 0x53,
-	0xe3, 0x74, 0x53, 0xce, 0x8b, 0x4f, 0xa9, 0xbb, 0x8f, 0xbf, 0xfe, 0x7d, 0x2d, 0x37, 0xd1, 0x53,
-	0x32, 0xf9, 0x27, 0xe7, 0x1a, 0x02, 0xb3, 0x04, 0xb2, 0x63, 0x2e, 0x7e, 0x97, 0xec, 0x8c, 0x4e,
-	0x7c, 0x17, 0xfd, 0x00, 0xf0, 0xca, 0xf8, 0xfe, 0xd1, 0xb4, 0xee, 0xb2, 0x4d, 0x58, 0xab, 0xd3,
-	0x03, 0x4d, 0x5f, 0xab, 0xa3, 0xbe, 0x96, 0xd1, 0x83, 0xb3, 0xf7, 0x25, 0xd0, 0x17, 0x00, 0x2b,
-	0x7a, 0x7d, 0x68, 0xf9, 0x34, 0xf9, 0xdc, 0xdd, 0x58, 0xf8, 0xac, 0xe5, 0xc6, 0xe3, 0x7d, 0x65,
-	0xef, 0x16, 0xaa, 0x15, 0xd8, 0xd3, 0x57, 0xb3, 0xf6, 0x64, 0x7f, 0x60, 0x83, 0x83, 0x81, 0x0d,
-	0xfe, 0x0e, 0x6c, 0xf0, 0x79, 0x68, 0x97, 0x0e, 0x86, 0x76, 0xe9, 0xf7, 0xd0, 0x2e, 0xbd, 0xae,
-	0x79, 0xbe, 0xdc, 0xea, 0xb6, 0xb1, 0xcb, 0xc3, 0x09, 0x34, 0xed, 0x8a, 0xfa, 0x13, 0x7b, 0x78,
-	0x18, 0x00, 0x00, 0xff, 0xff, 0x44, 0x43, 0x6b, 0xdb, 0xbf, 0x05, 0x00, 0x00,
+	// 717 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x56, 0x4f, 0x4f, 0x13, 0x4f,
+	0x18, 0xee, 0xf0, 0xcb, 0xaf, 0xc0, 0x70, 0x50, 0x46, 0x12, 0x61, 0x81, 0x0a, 0xab, 0x20, 0x62,
+	0xd8, 0x49, 0xc1, 0x20, 0x89, 0x26, 0x0a, 0x55, 0x0c, 0x46, 0x0d, 0x36, 0xd1, 0x83, 0x26, 0x92,
+	0x69, 0x77, 0x5c, 0x36, 0xee, 0xee, 0x2c, 0x3b, 0x5b, 0x94, 0x10, 0x2e, 0x9e, 0x38, 0x1a, 0xfd,
+	0x12, 0x1e, 0xf9, 0x06, 0x5e, 0x39, 0x12, 0xbd, 0x78, 0x22, 0x06, 0x8c, 0x9e, 0xfd, 0x06, 0xa6,
+	0x33, 0xb3, 0x2d, 0xad, 0xec, 0x2e, 0x2d, 0x5c, 0xc8, 0xf2, 0xce, 0xfb, 0x3e, 0xef, 0xf3, 0xbc,
+	0xff, 0x52, 0x38, 0x56, 0x66, 0xdc, 0x65, 0x3c, 0xa0, 0x96, 0xcd, 0xc3, 0x60, 0x03, 0xd3, 0x77,
+	0xc4, 0xf5, 0x1d, 0x8a, 0xd7, 0xf3, 0x78, 0xad, 0x42, 0x83, 0x0d, 0xc3, 0x0f, 0x58, 0xc8, 0xd0,
+	0x40, 0xa3, 0x9b, 0xa1, 0xdc, 0x8c, 0xf5, 0xbc, 0x36, 0x29, 0x9f, 0x70, 0x89, 0x70, 0x2a, 0x63,
+	0xf0, 0x7a, 0xbe, 0x44, 0x43, 0x92, 0xc7, 0x3e, 0xb1, 0x6c, 0x8f, 0x84, 0x36, 0xf3, 0x24, 0x8c,
+	0x96, 0x90, 0x2d, 0xdc, 0xf0, 0x29, 0x57, 0x6e, 0x43, 0x16, 0x63, 0x96, 0x43, 0x31, 0xf1, 0x6d,
+	0x4c, 0x3c, 0x8f, 0x85, 0x02, 0x23, 0x7a, 0x1d, 0x54, 0x09, 0xa3, 0x5c, 0x47, 0x89, 0x6a, 0xbd,
+	0xc4, 0xb5, 0x3d, 0x86, 0xc5, 0x5f, 0x65, 0xea, 0xb3, 0x98, 0xc5, 0xc4, 0x27, 0xae, 0x7e, 0x49,
+	0xab, 0xfe, 0x0a, 0x5e, 0x79, 0x5a, 0x8d, 0x7b, 0x6c, 0x9b, 0xa6, 0x43, 0xdf, 0x92, 0x80, 0xde,
+	0xf7, 0x48, 0xc9, 0xa1, 0x66, 0x61, 0x95, 0x78, 0x1e, 0x75, 0x8a, 0x74, 0xad, 0x42, 0x79, 0x88,
+	0x2e, 0xc2, 0x4e, 0x9f, 0x05, 0xe1, 0x8a, 0x6d, 0xf6, 0x83, 0x11, 0x30, 0xd1, 0x5d, 0xcc, 0x56,
+	0xff, 0x5d, 0x32, 0xd1, 0x30, 0x84, 0x65, 0xe9, 0x5a, 0x7d, 0xeb, 0x10, 0x6f, 0xdd, 0xca, 0xb2,
+	0x64, 0xea, 0xcf, 0xe1, 0x58, 0x0a, 0x3e, 0xf7, 0x99, 0xc7, 0x29, 0x9a, 0x82, 0xc8, 0xad, 0xf9,
+	0xac, 0x50, 0xe9, 0x24, 0x72, 0x75, 0x15, 0x7b, 0xdd, 0xe6, 0x68, 0x9d, 0xa5, 0xe0, 0xf2, 0x88,
+	0xf8, 0x22, 0x84, 0xf5, 0xfa, 0x0b, 0xbc, 0x9e, 0xe9, 0x71, 0x43, 0xd6, 0xce, 0xa8, 0x36, 0xcb,
+	0x90, 0x75, 0x53, 0xcd, 0x32, 0x96, 0x89, 0x45, 0x55, 0x6c, 0xf1, 0x48, 0xa4, 0xfe, 0x0b, 0xc0,
+	0xf1, 0xb4, 0x8c, 0x4a, 0x0a, 0x87, 0x83, 0xff, 0x4a, 0x59, 0x51, 0x35, 0xe1, 0xfd, 0x60, 0xe4,
+	0xbf, 0x89, 0x9e, 0xe9, 0x19, 0x23, 0x76, 0x96, 0x8c, 0xd8, 0x62, 0x0d, 0xb8, 0x71, 0xc9, 0xd1,
+	0x83, 0x06, 0x9d, 0x1d, 0x42, 0xe7, 0xd5, 0x54, 0x9d, 0x92, 0x71, 0x83, 0xd0, 0x67, 0x70, 0x50,
+	0xe8, 0x2c, 0x10, 0xc7, 0x29, 0x91, 0xf2, 0x9b, 0x02, 0xab, 0x78, 0x21, 0x0d, 0x4e, 0x3b, 0x08,
+	0x26, 0x1c, 0x3a, 0x1e, 0x56, 0x15, 0xed, 0x1e, 0xec, 0x2c, 0x4b, 0x93, 0x6a, 0xd2, 0x64, 0x42,
+	0x81, 0x9a, 0x41, 0xa2, 0x50, 0xfd, 0xf5, 0xf1, 0x59, 0xce, 0x7c, 0x1a, 0x76, 0x00, 0x1c, 0x8e,
+	0x49, 0xa4, 0xf4, 0x2c, 0xc2, 0x2e, 0x45, 0x2a, 0xea, 0x78, 0x2b, 0x82, 0x6a, 0xb1, 0x67, 0xd7,
+	0xd7, 0x3e, 0x88, 0x04, 0xe3, 0x65, 0x12, 0x10, 0x37, 0x2a, 0x88, 0xfe, 0x12, 0x5e, 0x68, 0xb0,
+	0xd6, 0xba, 0x91, 0xf5, 0x85, 0x45, 0xd5, 0x68, 0x34, 0x81, 0xbb, 0x0c, 0x5d, 0xe8, 0xde, 0xdd,
+	0xbf, 0x94, 0xf9, 0xfc, 0x7b, 0x67, 0x12, 0x14, 0x55, 0xec, 0xf4, 0x76, 0x17, 0xfc, 0x5f, 0xa0,
+	0xa3, 0x3f, 0x00, 0xf6, 0xc7, 0x4d, 0x35, 0xba, 0x93, 0x00, 0x7e, 0x92, 0xe3, 0xa4, 0xdd, 0x6d,
+	0x1f, 0x40, 0xea, 0xd5, 0x8b, 0xef, 0xbf, 0xfd, 0xfc, 0xd4, 0xf1, 0x08, 0x3d, 0xc4, 0xf1, 0xa7,
+	0xb9, 0xbe, 0x7b, 0x6a, 0xa5, 0xd5, 0x70, 0xe3, 0x4d, 0xb5, 0x10, 0x5b, 0x78, 0xb3, 0xbe, 0x01,
+	0x5b, 0x68, 0x1f, 0xc0, 0x81, 0xd8, 0x63, 0x81, 0xda, 0xe6, 0x1c, 0xb5, 0x4e, 0x9b, 0x3f, 0x05,
+	0x82, 0x92, 0x7d, 0x5b, 0xc8, 0x9e, 0x45, 0x37, 0xda, 0x90, 0xcd, 0xd1, 0x57, 0x00, 0xcf, 0x35,
+	0x0d, 0x2e, 0x9a, 0x4d, 0x23, 0x75, 0xfc, 0x59, 0xd1, 0x6e, 0xb6, 0x1c, 0xa7, 0x24, 0x3c, 0xd9,
+	0xae, 0x8e, 0x9c, 0xd0, 0x51, 0x40, 0xf3, 0x09, 0x3a, 0xca, 0x0a, 0x40, 0x6d, 0x56, 0x5c, 0xd7,
+	0xbe, 0x00, 0x78, 0xbe, 0x79, 0xa9, 0x51, 0xab, 0xec, 0x6a, 0x3d, 0x9a, 0x6b, 0x3d, 0x50, 0xe9,
+	0x9a, 0xab, 0xeb, 0x9a, 0x42, 0xd7, 0x4f, 0xae, 0x8b, 0xa3, 0x8f, 0x00, 0x66, 0xe5, 0x4e, 0xa2,
+	0xa9, 0xb4, 0xf4, 0x0d, 0xc7, 0x40, 0x33, 0x4e, 0xea, 0xae, 0x38, 0x5e, 0x13, 0xf4, 0x2e, 0xa3,
+	0xd1, 0x04, 0x7a, 0xf2, 0x14, 0x2c, 0xdc, 0xda, 0x3d, 0xc8, 0x81, 0xbd, 0x83, 0x1c, 0xf8, 0x71,
+	0x90, 0x03, 0x1f, 0x0e, 0x73, 0x99, 0xbd, 0xc3, 0x5c, 0xe6, 0xfb, 0x61, 0x2e, 0xf3, 0x62, 0xd4,
+	0xb2, 0xc3, 0xd5, 0x4a, 0xc9, 0x28, 0x33, 0x37, 0x06, 0xa6, 0x94, 0x15, 0xbf, 0x55, 0x66, 0xfe,
+	0x06, 0x00, 0x00, 0xff, 0xff, 0x90, 0x86, 0x64, 0xb8, 0xa6, 0x09, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -383,6 +606,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
+	// MiddlewareEnabledChannel returns the middleware enabled channel.
+	MiddlewareEnabledChannel(ctx context.Context, in *QueryMiddlewareEnabledChannelRequest, opts ...grpc.CallOption) (*QueryMiddlewareEnabledChannelResponse, error)
+	// MiddlewareEnabledChannels returns all the middleware enabled channels.
+	MiddlewareEnabledChannels(ctx context.Context, in *QueryMiddlewareEnabledChannelsRequest, opts ...grpc.CallOption) (*QueryMiddlewareEnabledChannelsResponse, error)
 	// CallbackCounter returns the current callback counter value.
 	CallbackCounter(ctx context.Context, in *QueryCallbackCounterRequest, opts ...grpc.CallOption) (*QueryCallbackCounterResponse, error)
 	// CallbackCounters returns all the counter values.
@@ -397,6 +624,24 @@ type queryClient struct {
 
 func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 	return &queryClient{cc}
+}
+
+func (c *queryClient) MiddlewareEnabledChannel(ctx context.Context, in *QueryMiddlewareEnabledChannelRequest, opts ...grpc.CallOption) (*QueryMiddlewareEnabledChannelResponse, error) {
+	out := new(QueryMiddlewareEnabledChannelResponse)
+	err := c.cc.Invoke(ctx, "/cosmosregistry.example.v1.Query/MiddlewareEnabledChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) MiddlewareEnabledChannels(ctx context.Context, in *QueryMiddlewareEnabledChannelsRequest, opts ...grpc.CallOption) (*QueryMiddlewareEnabledChannelsResponse, error) {
+	out := new(QueryMiddlewareEnabledChannelsResponse)
+	err := c.cc.Invoke(ctx, "/cosmosregistry.example.v1.Query/MiddlewareEnabledChannels", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *queryClient) CallbackCounter(ctx context.Context, in *QueryCallbackCounterRequest, opts ...grpc.CallOption) (*QueryCallbackCounterResponse, error) {
@@ -428,6 +673,10 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 
 // QueryServer is the server API for Query service.
 type QueryServer interface {
+	// MiddlewareEnabledChannel returns the middleware enabled channel.
+	MiddlewareEnabledChannel(context.Context, *QueryMiddlewareEnabledChannelRequest) (*QueryMiddlewareEnabledChannelResponse, error)
+	// MiddlewareEnabledChannels returns all the middleware enabled channels.
+	MiddlewareEnabledChannels(context.Context, *QueryMiddlewareEnabledChannelsRequest) (*QueryMiddlewareEnabledChannelsResponse, error)
 	// CallbackCounter returns the current callback counter value.
 	CallbackCounter(context.Context, *QueryCallbackCounterRequest) (*QueryCallbackCounterResponse, error)
 	// CallbackCounters returns all the counter values.
@@ -440,6 +689,12 @@ type QueryServer interface {
 type UnimplementedQueryServer struct {
 }
 
+func (*UnimplementedQueryServer) MiddlewareEnabledChannel(ctx context.Context, req *QueryMiddlewareEnabledChannelRequest) (*QueryMiddlewareEnabledChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MiddlewareEnabledChannel not implemented")
+}
+func (*UnimplementedQueryServer) MiddlewareEnabledChannels(ctx context.Context, req *QueryMiddlewareEnabledChannelsRequest) (*QueryMiddlewareEnabledChannelsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MiddlewareEnabledChannels not implemented")
+}
 func (*UnimplementedQueryServer) CallbackCounter(ctx context.Context, req *QueryCallbackCounterRequest) (*QueryCallbackCounterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CallbackCounter not implemented")
 }
@@ -452,6 +707,42 @@ func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsReq
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
 	s.RegisterService(&_Query_serviceDesc, srv)
+}
+
+func _Query_MiddlewareEnabledChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMiddlewareEnabledChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).MiddlewareEnabledChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cosmosregistry.example.v1.Query/MiddlewareEnabledChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).MiddlewareEnabledChannel(ctx, req.(*QueryMiddlewareEnabledChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_MiddlewareEnabledChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMiddlewareEnabledChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).MiddlewareEnabledChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cosmosregistry.example.v1.Query/MiddlewareEnabledChannels",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).MiddlewareEnabledChannels(ctx, req.(*QueryMiddlewareEnabledChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Query_CallbackCounter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -513,6 +804,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "MiddlewareEnabledChannel",
+			Handler:    _Query_MiddlewareEnabledChannel_Handler,
+		},
+		{
+			MethodName: "MiddlewareEnabledChannels",
+			Handler:    _Query_MiddlewareEnabledChannels_Handler,
+		},
+		{
 			MethodName: "CallbackCounter",
 			Handler:    _Query_CallbackCounter_Handler,
 		},
@@ -527,6 +826,160 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "cosmosregistry/example/v1/query.proto",
+}
+
+func (m *QueryMiddlewareEnabledChannelRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryMiddlewareEnabledChannelRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryMiddlewareEnabledChannelRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.ChannelId) > 0 {
+		i -= len(m.ChannelId)
+		copy(dAtA[i:], m.ChannelId)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.ChannelId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.PortId) > 0 {
+		i -= len(m.PortId)
+		copy(dAtA[i:], m.PortId)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.PortId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryMiddlewareEnabledChannelResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryMiddlewareEnabledChannelResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryMiddlewareEnabledChannelResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.MiddlewareEnabled {
+		i--
+		if m.MiddlewareEnabled {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryMiddlewareEnabledChannelsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryMiddlewareEnabledChannelsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryMiddlewareEnabledChannelsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryMiddlewareEnabledChannelsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryMiddlewareEnabledChannelsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryMiddlewareEnabledChannelsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.MiddlewareEnabledChannels) > 0 {
+		for iNdEx := len(m.MiddlewareEnabledChannels) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.MiddlewareEnabledChannels[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
 }
 
 func (m *QueryCallbackCounterRequest) Marshal() (dAtA []byte, err error) {
@@ -752,6 +1205,67 @@ func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
+func (m *QueryMiddlewareEnabledChannelRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.PortId)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.ChannelId)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryMiddlewareEnabledChannelResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.MiddlewareEnabled {
+		n += 2
+	}
+	return n
+}
+
+func (m *QueryMiddlewareEnabledChannelsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryMiddlewareEnabledChannelsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.MiddlewareEnabledChannels) > 0 {
+		for _, e := range m.MiddlewareEnabledChannels {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
 func (m *QueryCallbackCounterRequest) Size() (n int) {
 	if m == nil {
 		return 0
@@ -839,6 +1353,396 @@ func sovQuery(x uint64) (n int) {
 }
 func sozQuery(x uint64) (n int) {
 	return sovQuery(uint64((x << 1) ^ uint64((int64(x) >> 63))))
+}
+func (m *QueryMiddlewareEnabledChannelRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PortId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PortId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChannelId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ChannelId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryMiddlewareEnabledChannelResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MiddlewareEnabled", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.MiddlewareEnabled = bool(v != 0)
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryMiddlewareEnabledChannelsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryMiddlewareEnabledChannelsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryMiddlewareEnabledChannelsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field MiddlewareEnabledChannels", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.MiddlewareEnabledChannels = append(m.MiddlewareEnabledChannels, &MiddlewareEnabledChannel{})
+			if err := m.MiddlewareEnabledChannels[len(m.MiddlewareEnabledChannels)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
 }
 func (m *QueryCallbackCounterRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
