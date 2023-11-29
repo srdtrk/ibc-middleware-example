@@ -12,6 +12,20 @@ import "gogoproto/gogo.proto";
 
 // Msg defines the module Msg service.
 service Query {
+  // MiddlewareEnabledChannel returns the middleware enabled channel.
+  rpc MiddlewareEnabledChannel(QueryMiddlewareEnabledChannelRequest)
+      returns (QueryMiddlewareEnabledChannelResponse) {
+    option (google.api.http).get =
+        "/cosmosregistry/example/v1/middlewareenabledchannel/{port_id}/{channel_id}";
+  }
+
+  // MiddlewareEnabledChannels returns all the middleware enabled channels.
+  rpc MiddlewareEnabledChannels(QueryMiddlewareEnabledChannelsRequest)
+      returns (QueryMiddlewareEnabledChannelsResponse) {
+    option (google.api.http).get =
+        "/cosmosregistry/example/v1/middlewareenabledchannels";
+  }
+
   // CallbackCounter returns the current callback counter value.
   rpc CallbackCounter(QueryCallbackCounterRequest)
       returns (QueryCallbackCounterResponse) {
@@ -34,7 +48,40 @@ service Query {
   }
 }
 
-// QueryCallbackCounterRequest is the request type for the Query/Counter RPC
+// QueryMiddlewareEnabledChannelRequest is the request type for the
+// Query/MiddlewareEnabledChannel RPC method.
+message QueryMiddlewareEnabledChannelRequest {
+  // port_id defines the port_id to query for the counter.
+  string port_id = 1;
+  // channel_id defines the channel_id to query for the counter.
+  string channel_id = 2;
+}
+
+// QueryMiddlewareEnabledChannelResponse is the response type for the
+// Query/MiddlewareEnabledChannel RPC method.
+message QueryMiddlewareEnabledChannelResponse {
+  // middleware_enabled defines the middleware enabled status for the channel.
+  bool middleware_enabled = 1;
+}
+
+// QueryMiddlewareEnabledChannelsRequest is the request type for the
+// Query/MiddlewareEnabledChannels RPC method.
+message QueryMiddlewareEnabledChannelsRequest {
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryMiddlewareEnabledChannelsResponse is the response type for the
+// Query/MiddlewareEnabledChannels RPC method.
+message QueryMiddlewareEnabledChannelsResponse {
+  // channels defines all the middleware enabled channels in the store.
+  repeated MiddlewareEnabledChannel middleware_enabled_channels = 1;
+
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// QueryCallbackCounterRequest is the request type for the Query/CallbackCounter RPC
 // method.
 message QueryCallbackCounterRequest {
   // port_id defines the port_id to query for the counter.
@@ -43,14 +90,14 @@ message QueryCallbackCounterRequest {
   string channel_id = 2;
 }
 
-// QueryCallbackCounterResponse is the response type for the Query/Counter RPC
+// QueryCallbackCounterResponse is the response type for the Query/CallbackCounter RPC
 // method.
 message QueryCallbackCounterResponse {
   // counter defines the current counter for the sender.
   CallbackCounter counter = 1;
 }
 
-// QueryCallbackCountersRequest is the request type for the Query/Counters RPC
+// QueryCallbackCountersRequest is the request type for the Query/CallbackCounters RPC
 message QueryCallbackCountersRequest {
   // pagination defines an optional pagination for the request.
   cosmos.base.query.v1beta1.PageRequest pagination = 1;

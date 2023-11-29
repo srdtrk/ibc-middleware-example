@@ -47,13 +47,28 @@ message CallbackCounter {
   string channel_id = 5;
 }
 
+// MiddlewareEnabledChannel defines a channel that is enabled with this middleware.
+message MiddlewareEnabledChannel {
+  option (amino.name) = "cosmosregistry/example/MiddlewareEnabledChannel";
+
+  // unique port identifier
+  string port_id = 1;
+
+  // unique channel identifier
+  string channel_id = 2;
+}
+
 // GenesisState is the state that must be provided at genesis.
 message GenesisState {
   // counter defines the counter object.
   repeated CallbackCounter counters = 1
       [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
 
+  // list of middleware enabled channels
+  repeated MiddlewareEnabledChannel middleware_enabled_channels = 2
+      [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
+
   // params defines all the parameters of the module.
-  Params params = 2
+  Params params = 3
       [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
 }
