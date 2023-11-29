@@ -31,7 +31,10 @@ func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) er
 
 // ExportGenesis exports the module state to a genesis state.
 func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, error) {
-	params, err := k.Params.Get(ctx)
+	genesisState := &example.GenesisState{}
+
+	var err error
+	genesisState.Params, err = k.Params.Get(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -41,13 +44,21 @@ func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, erro
 		return nil, err
 	}
 
-	counters, err := iter.Values()
+	genesisState.Counters, err = iter.Values()
 	if err != nil {
 		return nil, err
 	}
 
-	return &example.GenesisState{
-		Params:   params,
-		Counters: counters,
-	}, nil
+	if err := k.MiddlewareEnabled.Walk(ctx, nil, func(key collections.Pair[string, string]) (bool, error) {
+		genesisState.MiddlewareEnabledChannels = append(genesisState.MiddlewareEnabledChannels, example.MiddlewareEnabledChannel{
+			PortId:    key.K1(),
+			ChannelId: key.K2(),
+		})
+
+		return false, nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return genesisState, nil
 }
