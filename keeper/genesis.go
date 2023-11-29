@@ -14,7 +14,7 @@ func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) er
 		return err
 	}
 
-	for _, counter := range data.Counters {
+	for _, counter := range data.CallbackCounters {
 		if err := k.CallbackCounter.Set(ctx, counter.ChannelId, counter); err != nil {
 			return err
 		}
@@ -44,7 +44,7 @@ func (k *Keeper) ExportGenesis(ctx context.Context) (*example.GenesisState, erro
 		return nil, err
 	}
 
-	genesisState.Counters, err = iter.Values()
+	genesisState.CallbackCounters, err = iter.Values()
 	if err != nil {
 		return nil, err
 	}

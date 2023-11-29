@@ -10,7 +10,7 @@ func NewGenesisState() *GenesisState {
 // Validate performs basic genesis state validation returning an error upon any
 func (gs *GenesisState) Validate() error {
 	uniq := make(map[string]bool)
-	for _, counter := range gs.Counters {
+	for _, counter := range gs.CallbackCounters {
 		if _, ok := uniq[counter.ChannelId]; ok {
 			return ErrDuplicateChannelID
 		}

@@ -47,7 +47,7 @@ func TestInitGenesis(t *testing.T) {
 					})
 				}
 
-				data.Counters = counters
+				data.CallbackCounters = counters
 				data.MiddlewareEnabledChannels = channels
 			},
 			false,
@@ -83,10 +83,10 @@ func TestInitGenesis(t *testing.T) {
 				counters, err := iter.Values()
 				require.NoError(t, err)
 
-				if len(data.Counters) == 0 {
+				if len(data.CallbackCounters) == 0 {
 					require.Len(t, counters, 0)
 				} else {
-					require.Equal(t, data.Counters, counters)
+					require.Equal(t, data.CallbackCounters, counters)
 				}
 
 				keyIter, err := f.k.MiddlewareEnabled.Iterate(f.ctx, nil)
@@ -136,7 +136,7 @@ func TestExportGenesis(t *testing.T) {
 			func() {
 				expGenesisState = &example.GenesisState{
 					Params:                    example.DefaultParams(),
-					Counters:                  []example.CallbackCounter{},
+					CallbackCounters:          []example.CallbackCounter{},
 					MiddlewareEnabledChannels: []example.MiddlewareEnabledChannel{},
 				}
 
@@ -148,7 +148,7 @@ func TestExportGenesis(t *testing.T) {
 						SendPacket:              1,
 						ChannelId:               fmt.Sprintf("channel-%d", i),
 					}
-					expGenesisState.Counters = append(expGenesisState.Counters, cc)
+					expGenesisState.CallbackCounters = append(expGenesisState.CallbackCounters, cc)
 					err := f.k.CallbackCounter.Set(f.ctx, cc.ChannelId, cc)
 					require.NoError(t, err)
 
