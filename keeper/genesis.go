@@ -3,6 +3,8 @@ package keeper
 import (
 	"context"
 
+	"cosmossdk.io/collections"
+
 	"github.com/cosmosregistry/example"
 )
 
@@ -14,6 +16,12 @@ func (k *Keeper) InitGenesis(ctx context.Context, data *example.GenesisState) er
 
 	for _, counter := range data.Counters {
 		if err := k.CallbackCounter.Set(ctx, counter.ChannelId, counter); err != nil {
+			return err
+		}
+	}
+
+	for _, channel := range data.MiddlewareEnabledChannels {
+		if err := k.MiddlewareEnabled.Set(ctx, collections.Join(channel.PortId, channel.ChannelId)); err != nil {
 			return err
 		}
 	}

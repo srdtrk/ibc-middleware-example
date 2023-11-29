@@ -29,6 +29,7 @@ func TestInitGenesis(t *testing.T) {
 			"success: some genesis state",
 			func() {
 				counters := []example.CallbackCounter{}
+				channels := []example.MiddlewareEnabledChannel{}
 
 				for i := 0; i < 10; i++ {
 					counters = append(counters, example.CallbackCounter{
@@ -38,9 +39,15 @@ func TestInitGenesis(t *testing.T) {
 						SendPacket:              1,
 						ChannelId:               fmt.Sprintf("channel-%d", i),
 					})
+
+					channels = append(channels, example.MiddlewareEnabledChannel{
+						PortId:    fmt.Sprintf("port-%d", i),
+						ChannelId: fmt.Sprintf("channel-%d", i),
+					})
 				}
 
 				data.Counters = counters
+				data.MiddlewareEnabledChannels = channels
 			},
 			false,
 		},
@@ -53,6 +60,7 @@ func TestInitGenesis(t *testing.T) {
 
 			data = &example.GenesisState{
 				Counters: []example.CallbackCounter{},
+				MiddlewareEnabledChannels: []example.MiddlewareEnabledChannel{},
 				Params:   example.DefaultParams(),
 			}
 
@@ -80,6 +88,18 @@ func TestInitGenesis(t *testing.T) {
 					require.Len(t, counters, 0)
 				} else {
 					require.Equal(t, data.Counters, counters)
+				}
+
+				keyIter, err := f.k.MiddlewareEnabled.Iterate(f.ctx, nil)
+				require.NoError(t, err)
+
+				channels, err := keyIter.Keys()
+				require.NoError(t, err)
+
+				if len(data.MiddlewareEnabledChannels) == 0 {
+					require.Len(t, channels, 0)
+				} else {
+					require.Equal(t, data.MiddlewareEnabledChannels, channels)
 				}
 			}
 		})
