@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"cosmossdk.io/collections"
 	"github.com/cosmosregistry/example"
 	"github.com/stretchr/testify/require"
 )
@@ -93,13 +94,18 @@ func TestInitGenesis(t *testing.T) {
 				keyIter, err := f.k.MiddlewareEnabled.Iterate(f.ctx, nil)
 				require.NoError(t, err)
 
-				channels, err := keyIter.Keys()
+				keys, err := keyIter.Keys()
 				require.NoError(t, err)
 
 				if len(data.MiddlewareEnabledChannels) == 0 {
-					require.Len(t, channels, 0)
+					require.Len(t, keys, 0)
 				} else {
-					require.Equal(t, data.MiddlewareEnabledChannels, channels)
+					expectedKeys := []collections.Pair[string,string]{}
+					for _, channel := range data.MiddlewareEnabledChannels {
+						expectedKeys = append(expectedKeys, collections.Join(channel.PortId, channel.ChannelId))
+					}
+
+					require.Equal(t, expectedKeys, keys)
 				}
 			}
 		})
