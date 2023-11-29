@@ -78,14 +78,12 @@ func TestQueryCallbackCounter(t *testing.T) {
 }
 
 func TestQueryMiddlewareEnabled(t *testing.T) {
-	var (
-		f *testFixture
-	)
+	var f *testFixture
 
 	testCases := []struct {
-		name     string
-		malleate func()
-		expResult   bool
+		name      string
+		malleate  func()
+		expResult bool
 	}{
 		{
 			"success",

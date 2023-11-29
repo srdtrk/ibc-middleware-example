@@ -40,8 +40,8 @@ func (qs queryServer) MiddlewareEnabledChannels(ctx context.Context, req *exampl
 		ctx,
 		qs.k.MiddlewareEnabled,
 		req.Pagination,
-		func(key collections.Pair[string,string], _ collections.NoValue) (*example.MiddlewareEnabledChannel, error) {
-			return &example.MiddlewareEnabledChannel{ PortId: key.K1(), ChannelId: key.K2() }, nil
+		func(key collections.Pair[string, string], _ collections.NoValue) (*example.MiddlewareEnabledChannel, error) {
+			return &example.MiddlewareEnabledChannel{PortId: key.K1(), ChannelId: key.K2()}, nil
 		})
 	if err != nil {
 		return nil, err

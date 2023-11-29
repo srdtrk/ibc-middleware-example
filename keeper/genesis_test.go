@@ -60,9 +60,9 @@ func TestInitGenesis(t *testing.T) {
 			f = initFixture(t)
 
 			data = &example.GenesisState{
-				Counters: []example.CallbackCounter{},
+				Counters:                  []example.CallbackCounter{},
 				MiddlewareEnabledChannels: []example.MiddlewareEnabledChannel{},
-				Params:   example.DefaultParams(),
+				Params:                    example.DefaultParams(),
 			}
 
 			tc.malleate()
@@ -100,7 +100,7 @@ func TestInitGenesis(t *testing.T) {
 				if len(data.MiddlewareEnabledChannels) == 0 {
 					require.Len(t, keys, 0)
 				} else {
-					expectedKeys := []collections.Pair[string,string]{}
+					expectedKeys := []collections.Pair[string, string]{}
 					for _, channel := range data.MiddlewareEnabledChannels {
 						expectedKeys = append(expectedKeys, collections.Join(channel.PortId, channel.ChannelId))
 					}
