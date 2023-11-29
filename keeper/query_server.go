@@ -24,6 +24,32 @@ type queryServer struct {
 	k Keeper
 }
 
+// MiddlewareEnabledChannel defines the handler for the Query/MiddlewareEnabledChannel RPC method.
+func (qs queryServer) MiddlewareEnabledChannel(ctx context.Context, req *example.QueryMiddlewareEnabledChannelRequest) (*example.QueryMiddlewareEnabledChannelResponse, error) {
+	enabled, err := qs.k.MiddlewareEnabled.Has(ctx, collections.Join(req.PortId, req.ChannelId))
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	return &example.QueryMiddlewareEnabledChannelResponse{MiddlewareEnabled: enabled}, nil
+}
+
+// MiddlewareEnabledChannels defines the handler for the Query/MiddlewareEnabledChannels RPC method.
+func (qs queryServer) MiddlewareEnabledChannels(ctx context.Context, req *example.QueryMiddlewareEnabledChannelsRequest) (*example.QueryMiddlewareEnabledChannelsResponse, error) {
+	channels, pageRes, err := query.CollectionPaginate(
+		ctx,
+		qs.k.MiddlewareEnabled,
+		req.Pagination,
+		func(key collections.Pair[string,string], _ collections.NoValue) (*example.MiddlewareEnabledChannel, error) {
+			return &example.MiddlewareEnabledChannel{ PortId: key.K1(), ChannelId: key.K2() }, nil
+		})
+	if err != nil {
+		return nil, err
+	}
+
+	return &example.QueryMiddlewareEnabledChannelsResponse{MiddlewareEnabledChannels: channels, Pagination: pageRes}, nil
+}
+
 // CallbackCounter defines the handler for the Query/CallbackCounter RPC method.
 func (qs queryServer) CallbackCounter(ctx context.Context, req *example.QueryCallbackCounterRequest) (*example.QueryCallbackCounterResponse, error) {
 	counter, err := qs.k.CallbackCounter.Get(ctx, req.ChannelId)

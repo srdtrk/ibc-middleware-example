@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"testing"
 
+	"cosmossdk.io/collections"
 	"github.com/cosmos/cosmos-sdk/types/query"
 
 	"github.com/cosmosregistry/example"
@@ -72,6 +73,46 @@ func TestQueryCallbackCounter(t *testing.T) {
 				require.NoError(t, err)
 				require.Equal(t, expCallbackCounter, resp.Counter)
 			}
+		})
+	}
+}
+
+func TestQueryMiddlewareEnabled(t *testing.T) {
+	var (
+		f *testFixture
+	)
+
+	testCases := []struct {
+		name     string
+		malleate func()
+		expResult   bool
+	}{
+		{
+			"success",
+			func() {
+				err := f.k.MiddlewareEnabled.Set(f.ctx, collections.Join(defaultTestPortID, defaultTestChanID))
+				require.NoError(t, err)
+			},
+			true,
+		},
+		{
+			"failure: counter not found",
+			func() {},
+			false,
+		},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			f = initFixture(t)
+
+			tc.malleate()
+
+			resp, err := f.queryServer.MiddlewareEnabledChannel(f.ctx, &example.QueryMiddlewareEnabledChannelRequest{PortId: defaultTestPortID, ChannelId: defaultTestChanID})
+
+			require.NoError(t, err)
+			require.Equal(t, tc.expResult, resp.MiddlewareEnabled)
 		})
 	}
 }
