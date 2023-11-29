@@ -224,3 +224,59 @@ func TestQueryCallbackCounters(t *testing.T) {
 		})
 	}
 }
+
+func TestQueryMiddlewareEnabledChannel(t *testing.T) {
+	var (
+		f *testFixture
+
+		expResponse *example.QueryMiddlewareEnabledChannelResponse
+	)
+
+	testCases := []struct {
+		name     string
+		malleate func()
+		expErr   bool
+	}{
+		{
+			"success: channel enabled",
+			func() {
+				expResponse = &example.QueryMiddlewareEnabledChannelResponse{
+					MiddlewareEnabled: true,
+				}
+
+				err := f.k.MiddlewareEnabled.Set(f.ctx, collections.Join(defaultTestPortID, defaultTestChanID))
+				require.NoError(t, err)
+			},
+			false,
+		},
+		{
+			"success: channel not enabled",
+			func() {
+				expResponse = &example.QueryMiddlewareEnabledChannelResponse{
+					MiddlewareEnabled: false,
+				}
+			},
+			false,
+		},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			f = initFixture(t)
+
+			expResponse = nil
+			tc.malleate()
+
+			resp, err := f.queryServer.MiddlewareEnabledChannel(f.ctx, &example.QueryMiddlewareEnabledChannelRequest{PortId: defaultTestPortID, ChannelId: defaultTestChanID})
+
+			if tc.expErr {
+				require.Error(t, err)
+				require.Nil(t, resp)
+			} else {
+				require.NoError(t, err)
+				require.Equal(t, expResponse, resp)
+			}
+		})
+	}
+}
